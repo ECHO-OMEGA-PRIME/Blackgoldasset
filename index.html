@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGAT | Black Gold Asset Transfer LLC</title>
+<meta name="description" content="BGAT — Comprehensive chemical products and services for drilling, completions, production, and midstream. Veteran-owned. Dependable.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --gold: #C8952E; --gold-light: #E8B84B; --gold-dark: #9A7023;
+  --black: #0A0A0A; --black-soft: #111111; --black-card: #1A1A1A;
+  --white: #F5F0E8; --white-dim: #C4B99A; --orange: #D4712A;
+  --font-display: 'Cinzel', serif; --font-heading: 'Raleway', sans-serif; --font-body: 'Source Sans 3', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+#loader { position: fixed; inset: 0; z-index: 10000; background: #050505; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader-logo { font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: var(--gold); letter-spacing: 8px; margin-bottom: 32px; animation: loaderPulse 1.5s ease-in-out infinite; }
+@keyframes loaderPulse { 0%, 100% { opacity: 0.4; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
+.loader-bar-track { width: 200px; height: 2px; background: rgba(200,149,46,0.15); position: relative; overflow: hidden; }
+.loader-bar-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--gold); transition: width 0.3s ease; }
+.loader-text { margin-top: 16px; font-family: var(--font-heading); font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--white-dim); }
+#hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 0; transition: all 0.4s ease; background: rgba(5,5,5,0.3); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(200,149,46,0.05); }
+nav.scrolled { padding: 10px 0; background: rgba(5,5,5,0.92); border-bottom: 1px solid rgba(200,149,46,0.2); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-logo-text { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--gold); letter-spacing: 3px; }
+.nav-logo-sub { font-family: var(--font-heading); font-size: 0.6rem; color: var(--white-dim); letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: -2px; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a { font-family: var(--font-heading); font-size: 0.8rem; font-weight: 500; color: var(--white-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; position: relative; transition: color 0.3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta { background: var(--gold) !important; color: var(--black) !important; padding: 10px 24px !important; font-weight: 600 !important; letter-spacing: 1.5px !important; transition: all 0.3s ease !important; }
+.nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,149,46,0.4); }
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.hamburger span { display: block; width: 26px; height: 2px; background: var(--gold); transition: all 0.3s ease; }
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 1; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(3,5,16,0.1) 0%, rgba(3,5,16,0.05) 25%, rgba(3,5,16,0.15) 50%, rgba(3,5,16,0.6) 80%, rgba(3,5,16,0.95) 95%, #030510 100%); pointer-events: none; z-index: 1; }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 24px; }
+.hero-content > * { opacity: 0; transform: translateY(40px); }
+.hero-content.animate > * { animation: heroReveal 1s cubic-bezier(0.16,1,0.3,1) forwards; }
+.hero-content.animate > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-content.animate > *:nth-child(2) { animation-delay: 0.25s; }
+.hero-content.animate > *:nth-child(3) { animation-delay: 0.4s; }
+.hero-content.animate > *:nth-child(4) { animation-delay: 0.55s; }
+.hero-content.animate > *:nth-child(5) { animation-delay: 0.7s; }
+@keyframes heroReveal { to { opacity: 1; transform: translateY(0); } }
+.hero-badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; border: 1px solid rgba(200,149,46,0.3); border-radius: 50px; margin-bottom: 32px; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--gold); }
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+.hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem,6vw,5rem); font-weight: 900; line-height: 1.1; margin-bottom: 8px; text-shadow: 0 4px 40px rgba(0,0,0,0.6); }
+.hero h1 .gold { color: var(--gold); text-shadow: 0 0 60px rgba(200,149,46,0.3), 0 4px 40px rgba(0,0,0,0.6); }
+.hero-tagline { font-family: var(--font-display); font-size: clamp(1rem,2vw,1.4rem); font-weight: 400; color: var(--gold-light); letter-spacing: 6px; text-transform: uppercase; margin-bottom: 28px; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
+.hero p { font-size: 1.15rem; line-height: 1.7; color: var(--white-dim); max-width: 600px; margin: 0 auto 40px; font-weight: 300; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; padding: 16px 36px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s ease; }
+.btn-primary { background: var(--gold); color: var(--black); }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 40px rgba(200,149,46,0.4); }
+.btn-outline { background: rgba(200,149,46,0.08); color: var(--gold); border: 1px solid rgba(200,149,46,0.5); backdrop-filter: blur(10px); }
+.btn-outline:hover { background: rgba(200,149,46,0.15); border-color: var(--gold); transform: translateY(-2px); }
+.scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fadeInUp 1s ease 1.5s forwards; }
+@keyframes fadeInUp { to { opacity: 0.6; } }
+.scroll-indicator span { font-family: var(--font-heading); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--white-dim); }
+.scroll-mouse { width: 22px; height: 34px; border: 1.5px solid rgba(200,149,46,0.4); border-radius: 11px; position: relative; }
+.scroll-mouse::before { content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 3px; height: 6px; border-radius: 2px; background: var(--gold); animation: scrollBounce 2s ease-in-out infinite; }
+@keyframes scrollBounce { 0%, 100% { top: 6px; opacity: 1; } 50% { top: 16px; opacity: 0.3; } }
+.page-content { position: relative; z-index: 2; background: var(--black); }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-pad { padding: 100px 0; }
+.section-header { text-align: center; margin-bottom: 64px; }
+.section-label { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; color: var(--gold); margin-bottom: 16px; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+.section-divider { width: 60px; height: 2px; background: var(--gold); margin: 20px auto; }
+.section-desc { font-size: 1.05rem; color: var(--white-dim); max-width: 600px; margin: 0 auto; line-height: 1.7; font-weight: 300; }
+.gold { color: var(--gold); }
+.stats-bar { position: relative; background: var(--black-soft); border-top: 1px solid rgba(200,149,46,0.15); border-bottom: 1px solid rgba(200,149,46,0.15); padding: 48px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; text-align: center; }
+.stat-item { position: relative; }
+.stat-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: rgba(200,149,46,0.15); }
+.stat-number { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+.stat-label { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; color: var(--white-dim); }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 24px; }
+.product-card { background: var(--black-card); border: 1px solid rgba(200,149,46,0.1); padding: 36px 28px; position: relative; overflow: hidden; transition: all 0.4s ease; }
+.product-card:hover { border-color: rgba(200,149,46,0.35); transform: translateY(-4px); box-shadow: 0 16px 60px rgba(0,0,0,0.5); }
+.product-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,transparent,var(--gold),transparent); opacity: 0; transition: opacity 0.4s ease; }
+.product-card:hover::after { opacity: 1; }
+.product-icon { width: 52px; height: 52px; border: 1px solid rgba(200,149,46,0.25); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.4rem; color: var(--gold); transition: all 0.3s ease; }
+.product-card:hover .product-icon { background: rgba(200,149,46,0.1); border-color: var(--gold); }
+.product-card h3 { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
+.product-list { list-style: none; display: grid; gap: 8px; }
+.product-list li { font-size: 0.9rem; color: var(--white-dim); padding-left: 16px; position: relative; font-weight: 300; }
+.product-list li::before { content: ''; position: absolute; left: 0; top: 50%; width: 6px; height: 1px; background: var(--gold); }
+.services-layout { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+.service-block { background: var(--black-card); border: 1px solid rgba(200,149,46,0.1); padding: 40px 32px; text-align: center; transition: all 0.4s ease; }
+.service-block:hover { border-color: rgba(200,149,46,0.3); transform: translateY(-4px); }
+.service-block-icon { width: 64px; height: 64px; margin: 0 auto 20px; border: 1px solid rgba(200,149,46,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--gold); }
+.service-block:hover .service-block-icon { background: rgba(200,149,46,0.1); border-color: var(--gold); }
+.service-block h3 { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+.service-block ul { list-style: none; display: grid; gap: 8px; }
+.service-block li { font-size: 0.9rem; color: var(--white-dim); font-weight: 300; }
+.why-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+.why-card { background: var(--black-card); border: 1px solid rgba(200,149,46,0.1); padding: 36px; display: flex; gap: 20px; transition: all 0.4s ease; }
+.why-card:hover { border-color: rgba(200,149,46,0.25); }
+.why-number { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: rgba(200,149,46,0.25); line-height: 1; flex-shrink: 0; min-width: 48px; }
+.why-card h3 { font-family: var(--font-heading); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+.why-card p { font-size: 0.9rem; color: var(--white-dim); line-height: 1.6; font-weight: 300; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-text h3 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 20px; }
+.about-text p { font-size: 1.05rem; line-height: 1.8; color: var(--white-dim); margin-bottom: 16px; font-weight: 300; }
+.about-values { display: grid; gap: 20px; margin-top: 32px; }
+.value-item { display: flex; gap: 16px; align-items: flex-start; }
+.value-icon { flex-shrink: 0; width: 48px; height: 48px; border: 1px solid rgba(200,149,46,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; }
+.value-item h4 { font-family: var(--font-heading); font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+.value-item p { font-size: 0.9rem; line-height: 1.5; margin-bottom: 0; }
+.about-card { background: var(--black-card); border: 1px solid rgba(200,149,46,0.15); padding: 48px; position: relative; overflow: hidden; }
+.about-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--gold),var(--orange),var(--gold)); }
+.about-card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--gold); margin-bottom: 24px; }
+.commitment-list { list-style: none; display: grid; gap: 16px; }
+.commitment-list li { display: flex; align-items: center; gap: 14px; font-size: 1rem; }
+.commitment-list li::before { content: '\25C6'; color: var(--gold); font-size: 0.6rem; flex-shrink: 0; }
+.cta-banner { position: relative; padding: 80px 0; text-align: center; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(200,149,46,0.08) 0%,rgba(212,113,42,0.05) 50%,rgba(200,149,46,0.08) 100%); border-top: 1px solid rgba(200,149,46,0.15); border-bottom: 1px solid rgba(200,149,46,0.15); }
+.cta-banner .container { position: relative; z-index: 1; }
+.cta-banner h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 700; margin-bottom: 16px; }
+.cta-banner p { font-size: 1.05rem; color: var(--white-dim); margin-bottom: 32px; font-weight: 300; }
+.cta-phones { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; color: var(--gold); text-decoration: none; transition: color 0.3s ease; }
+.cta-phone:hover { color: var(--gold-light); }
+.cta-phone svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+#contact { background: var(--black-soft); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.contact-info h3 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 16px; }
+.contact-info p { color: var(--white-dim); line-height: 1.7; margin-bottom: 32px; font-weight: 300; }
+.contact-detail { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 20px; }
+.contact-detail-icon { width: 40px; height: 40px; border: 1px solid rgba(200,149,46,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold); }
+.contact-detail-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+.contact-detail strong { display: block; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
+.contact-detail a { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
+.contact-detail a:hover { color: var(--gold); }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--white-dim); margin-bottom: 8px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,149,46,0.15); color: var(--white); font-family: var(--font-body); font-size: 0.95rem; transition: border-color 0.3s ease; outline: none; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select option { background: var(--black-card); color: var(--white); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.contact-form { background: var(--black-card); border: 1px solid rgba(200,149,46,0.1); padding: 40px; }
+.btn-submit { width: 100%; justify-content: center; }
+.badge-row { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; margin-top: 40px; }
+.badge-item { display: flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--white-dim); }
+.badge-icon { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(200,149,46,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); padding: 48px 0 24px; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 36px; flex-wrap: wrap; gap: 32px; }
+.footer-brand h3 { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+.footer-brand p { font-size: 0.85rem; color: var(--white-dim); font-weight: 300; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-family: var(--font-heading); font-size: 0.75rem; color: var(--white-dim); text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid rgba(200,149,46,0.08); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 0.8rem; color: rgba(196,185,154,0.5); }
+.footer-powered { text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(200,149,46,0.05); }
+.footer-powered .chromatic { font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; background: linear-gradient(90deg, #C8952E, #E8B84B, #D4712A, #C8952E, #E8B84B); background-size: 300% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: chromaticShift 4s ease-in-out infinite; }
+.footer-powered .sovereign { font-family: var(--font-heading); font-size: 0.7rem; color: rgba(196,185,154,0.35); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
+@keyframes chromaticShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* CHAT WIDGET */
+#ai-chat-fab { position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--orange)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 30px rgba(200,149,46,0.4), 0 0 0 0 rgba(200,149,46,0.3); transition: all 0.3s ease; animation: fabPulse 3s ease-in-out infinite; }
+#ai-chat-fab:hover { transform: scale(1.08); box-shadow: 0 8px 40px rgba(200,149,46,0.6); }
+@keyframes fabPulse { 0%, 100% { box-shadow: 0 6px 30px rgba(200,149,46,0.4), 0 0 0 0 rgba(200,149,46,0.3); } 50% { box-shadow: 0 6px 30px rgba(200,149,46,0.4), 0 0 0 12px rgba(200,149,46,0); } }
+#ai-chat-fab svg { width: 28px; height: 28px; fill: var(--black); }
+#ai-chat-fab.open svg:first-child { display: none; }
+#ai-chat-fab.open svg:last-child { display: block; }
+#ai-chat-fab svg:last-child { display: none; }
+#ai-chat-panel { position: fixed; bottom: 100px; right: 24px; z-index: 9998; width: 400px; max-height: 620px; background: #0d0d0d; border: 1px solid rgba(200,149,46,0.2); border-radius: 16px; overflow: hidden; display: none; flex-direction: column; box-shadow: 0 20px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,149,46,0.1); animation: chatSlideIn 0.3s ease; }
+#ai-chat-panel.open { display: flex; }
+@keyframes chatSlideIn { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.chat-header { padding: 16px 20px; background: linear-gradient(135deg, rgba(200,149,46,0.1), rgba(212,113,42,0.05)); border-bottom: 1px solid rgba(200,149,46,0.15); display: flex; align-items: center; justify-content: space-between; }
+.chat-header-left { display: flex; align-items: center; gap: 12px; }
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--orange)); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.7rem; font-weight: 900; color: var(--black); letter-spacing: 1px; }
+.chat-header-info h4 { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+.chat-header-info span { font-size: 0.7rem; color: var(--white-dim); display: flex; align-items: center; gap: 5px; }
+.chat-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; display: inline-block; }
+.chat-voice-toggle { background: none; border: 1px solid rgba(200,149,46,0.3); border-radius: 6px; padding: 6px 10px; cursor: pointer; color: var(--white-dim); font-size: 0.7rem; font-family: var(--font-heading); letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+.chat-voice-toggle:hover, .chat-voice-toggle.active { border-color: var(--gold); color: var(--gold); background: rgba(200,149,46,0.08); }
+.chat-personality-bar { padding: 8px 16px; display: flex; gap: 6px; overflow-x: auto; border-bottom: 1px solid rgba(200,149,46,0.08); background: rgba(0,0,0,0.3); }
+.chat-personality-bar::-webkit-scrollbar { height: 0; }
+.personality-chip { flex-shrink: 0; padding: 4px 12px; border-radius: 20px; font-family: var(--font-heading); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: 1px solid rgba(200,149,46,0.15); background: transparent; color: var(--white-dim); transition: all 0.2s ease; }
+.personality-chip:hover { border-color: rgba(200,149,46,0.4); color: var(--gold); }
+.personality-chip.active { background: var(--gold); color: var(--black); border-color: var(--gold); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 300px; max-height: 380px; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(200,149,46,0.2); border-radius: 2px; }
+.chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; animation: msgFadeIn 0.3s ease; }
+@keyframes msgFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.chat-msg.assistant { align-self: flex-start; background: rgba(200,149,46,0.08); border: 1px solid rgba(200,149,46,0.1); color: var(--white); border-bottom-left-radius: 4px; }
+.chat-msg.user { align-self: flex-end; background: var(--gold); color: var(--black); border-bottom-right-radius: 4px; font-weight: 500; }
+.chat-msg .msg-personality { font-family: var(--font-heading); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px; display: block; }
+.chat-msg.user .msg-personality { color: rgba(0,0,0,0.5); }
+.chat-thinking { align-self: flex-start; padding: 10px 14px; font-size: 0.75rem; color: var(--gold); font-family: var(--font-heading); letter-spacing: 1px; animation: thinkPulse 1.5s ease-in-out infinite; }
+@keyframes thinkPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+.chat-typing { align-self: flex-start; display: flex; gap: 4px; padding: 12px 16px; }
+.chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: typingBounce 1.4s ease-in-out infinite; }
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce { 0%, 100% { transform: translateY(0); opacity: 0.3; } 50% { transform: translateY(-6px); opacity: 1; } }
+.chat-input-area { padding: 12px 16px; border-top: 1px solid rgba(200,149,46,0.1); display: flex; gap: 8px; background: rgba(0,0,0,0.4); }
+.chat-input { flex: 1; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(200,149,46,0.15); border-radius: 8px; color: var(--white); font-family: var(--font-body); font-size: 0.9rem; outline: none; transition: border-color 0.3s ease; }
+.chat-input:focus { border-color: var(--gold); }
+.chat-send { width: 40px; height: 40px; border-radius: 8px; background: var(--gold); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+.chat-send:hover { background: var(--gold-light); transform: scale(1.05); }
+.chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+.chat-send svg { width: 18px; height: 18px; fill: var(--black); }
+.chat-memory-bar { padding: 6px 16px; font-family: var(--font-heading); font-size: 0.6rem; color: rgba(200,149,46,0.4); letter-spacing: 1px; text-transform: uppercase; border-top: 1px solid rgba(200,149,46,0.05); text-align: center; background: rgba(0,0,0,0.3); }
+.speaking-indicator { display: inline-flex; align-items: center; gap: 3px; margin-left: 6px; }
+.speaking-indicator span { display: inline-block; width: 2px; height: 8px; background: var(--gold); border-radius: 1px; animation: speakBar 0.6s ease-in-out infinite alternate; }
+.speaking-indicator span:nth-child(2) { animation-delay: 0.15s; height: 12px; }
+.speaking-indicator span:nth-child(3) { animation-delay: 0.3s; height: 6px; }
+@keyframes speakBar { to { height: 3px; } }
+
+/* AUTH MODAL */
+.auth-overlay { position: fixed; inset: 0; z-index: 10001; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; }
+.auth-overlay.open { display: flex; }
+.auth-modal { background: var(--black-card); border: 1px solid rgba(200,149,46,0.25); width: 440px; max-width: 95vw; max-height: 90vh; overflow-y: auto; position: relative; animation: chatSlideIn 0.3s ease; }
+.auth-modal-header { padding: 28px 32px 0; text-align: center; }
+.auth-modal-header h2 { font-family: var(--font-display); font-size: 1.4rem; color: var(--gold); margin-bottom: 4px; }
+.auth-modal-header p { font-size: 0.85rem; color: var(--white-dim); }
+.auth-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--white-dim); font-size: 1.5rem; cursor: pointer; line-height: 1; padding: 4px 8px; }
+.auth-close:hover { color: var(--gold); }
+.auth-tabs { display: flex; border-bottom: 1px solid rgba(200,149,46,0.15); margin: 20px 32px 0; }
+.auth-tab { flex: 1; padding: 10px; text-align: center; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--white-dim); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; background: none; border-top: none; border-left: none; border-right: none; }
+.auth-tab:hover { color: var(--gold); }
+.auth-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.auth-body { padding: 24px 32px 28px; }
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+.auth-form .form-group { margin-bottom: 14px; }
+.auth-form .form-group label { font-size: 0.7rem; margin-bottom: 6px; }
+.auth-form .form-group input, .auth-form .form-group select { padding: 11px 14px; font-size: 0.9rem; }
+.auth-form .form-row { gap: 12px; }
+.auth-divider { display: flex; align-items: center; gap: 12px; margin: 18px 0; font-family: var(--font-heading); font-size: 0.7rem; color: var(--white-dim); letter-spacing: 1px; text-transform: uppercase; }
+.auth-divider::before, .auth-divider::after { content: ''; flex: 1; height: 1px; background: rgba(200,149,46,0.15); }
+.btn-google { width: 100%; padding: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(200,149,46,0.2); color: var(--white); font-family: var(--font-heading); font-size: 0.85rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s; }
+.btn-google:hover { background: rgba(200,149,46,0.1); border-color: var(--gold); }
+.btn-google img { width: 20px; height: 20px; }
+.btn-sms { width: 100%; padding: 12px; background: rgba(200,149,46,0.06); border: 1px solid rgba(200,149,46,0.2); color: var(--white); font-family: var(--font-heading); font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; margin-top: 8px; }
+.btn-sms:hover { background: rgba(200,149,46,0.12); border-color: var(--gold); }
+.auth-error { color: #e74c3c; font-size: 0.8rem; margin-top: 8px; display: none; }
+.auth-error.show { display: block; }
+.nav-user-area { display: flex; align-items: center; gap: 12px; }
+.nav-user-btn { background: none; border: 1px solid rgba(200,149,46,0.3); padding: 8px 16px; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s; }
+.nav-user-btn:hover { background: rgba(200,149,46,0.1); border-color: var(--gold); }
+.nav-user-info { display: none; align-items: center; gap: 10px; }
+.nav-user-info.active { display: flex; }
+.nav-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; color: var(--black); }
+.nav-user-name { font-family: var(--font-heading); font-size: 0.75rem; color: var(--white-dim); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-signout { background: none; border: none; color: var(--white-dim); font-size: 0.7rem; cursor: pointer; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 1px; padding: 4px 8px; }
+.nav-signout:hover { color: var(--gold); }
+
+/* OIL RAIN OVERLAY */
+#oil-rain-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+
+@media (max-width: 968px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .services-layout { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(5,5,5,0.98); backdrop-filter: blur(20px); padding: 24px; gap: 20px; border-bottom: 1px solid rgba(200,149,46,0.15); }
+  .services-layout { grid-template-columns: 1fr; }
+  .products-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .section-pad { padding: 64px 0; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 300px; justify-content: center; }
+  #ai-chat-panel { width: calc(100% - 32px); right: 16px; bottom: 90px; }
+  #oil-rain-canvas { display: none; }
+  #oilfield-canvas { display: none; }
+  .nav-user-name { display: none; }
+  .nav-user-area { gap: 6px; }
+  .auth-modal { width: 100%; max-width: 100vw; border-radius: 0; max-height: 100vh; }
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-logo">BGAT</div>
+  <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderFill"></div></div>
+  <div class="loader-text">Initializing</div>
+</div>
+
+<canvas id="hero-canvas"></canvas>
+<canvas id="oil-rain-canvas"></canvas>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><div><span class="nav-logo-text">BGAT</span><span class="nav-logo-sub">Black Gold Asset Transfer</span></div></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#why-bgat">Why BGAT</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
+      <div class="nav-user-area">
+        <button class="nav-user-btn" id="navSignIn" onclick="openAuthModal()">Sign In</button>
+        <div class="nav-user-info" id="navUserInfo">
+          <div class="nav-avatar" id="navAvatar">?</div>
+          <span class="nav-user-name" id="navUserName"></span>
+          <button class="nav-signout" onclick="signOutUser()">Out</button>
+        </div>
+      </div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+<div class="auth-modal">
+  <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+  <div class="auth-modal-header">
+    <h2>Black Gold Asset Transfer</h2>
+    <p>Sign in to save your conversations with Lanny</p>
+  </div>
+  <div class="auth-tabs">
+    <button class="auth-tab active" onclick="switchAuthTab('login',this)">Sign In</button>
+    <button class="auth-tab" onclick="switchAuthTab('register',this)">Create Account</button>
+  </div>
+  <div class="auth-body">
+    <!-- LOGIN FORM -->
+    <div class="auth-form active" id="authLogin">
+      <button class="btn-google" onclick="googleSignIn()">
+        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.9 33.1 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 5.7 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.4 15.6 18.8 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34 5.7 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.8 13.4-4.7l-6.2-5.2C29.2 35.9 26.7 37 24 37c-5.4 0-9.9-3.6-11.5-8.5l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.6 39.6 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Sign in with Google
+      </button>
+      <button class="btn-sms" onclick="showSmsLogin()">&#128241; Sign in with Phone / SMS</button>
+      <div class="auth-divider">or email</div>
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="you@company.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="Password"></div>
+      <div class="auth-error" id="loginError"></div>
+      <button class="btn btn-primary btn-submit" onclick="emailSignIn()" style="margin-top:8px">Sign In</button>
+    </div>
+    <!-- REGISTER FORM -->
+    <div class="auth-form" id="authRegister">
+      <button class="btn-google" onclick="googleSignIn()">
+        <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.9 33.1 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 5.7 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.4 15.6 18.8 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34 5.7 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.8 13.4-4.7l-6.2-5.2C29.2 35.9 26.7 37 24 37c-5.4 0-9.9-3.6-11.5-8.5l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.6 39.6 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Sign up with Google
+      </button>
+      <div class="auth-divider">or create account</div>
+      <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" id="regFirst" placeholder="First name"></div><div class="form-group"><label>Last Name</label><input type="text" id="regLast" placeholder="Last name"></div></div>
+      <div class="form-group"><label>Email</label><input type="email" id="regEmail" placeholder="you@company.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="regPass" placeholder="Min 6 characters"></div>
+      <div class="form-group"><label>Company Name</label><input type="text" id="regCompany" placeholder="Your company"></div>
+      <div class="form-row"><div class="form-group"><label>Company Contact</label><input type="text" id="regContact" placeholder="Contact name or phone"></div><div class="form-group"><label>Industry Type</label><select id="regIndustry"><option value="">Select...</option><option>E&P Operator</option><option>Midstream</option><option>Oilfield Services</option><option>Drilling Contractor</option><option>Pipeline</option><option>Saltwater Disposal</option><option>Chemical Vendor</option><option>Consulting</option><option>Other</option></select></div></div>
+      <div class="form-group"><label>Mailing Address</label><input type="text" id="regAddress" placeholder="Street, City, State, ZIP"></div>
+      <div class="auth-error" id="regError"></div>
+      <button class="btn btn-primary btn-submit" onclick="emailRegister()" style="margin-top:8px">Create Account</button>
+    </div>
+    <!-- SMS FORM -->
+    <div class="auth-form" id="authSms">
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="smsPhone" placeholder="+1 (432) 555-0000"></div>
+      <button class="btn btn-primary btn-submit" id="smsSendBtn" onclick="sendSmsCode()">Send Code</button>
+      <div class="form-group" id="smsCodeGroup" style="display:none;margin-top:14px"><label>Verification Code</label><input type="text" id="smsCode" placeholder="123456"></div>
+      <button class="btn btn-primary btn-submit" id="smsVerifyBtn" style="display:none;margin-top:8px" onclick="verifySmsCode()">Verify</button>
+      <div class="auth-error" id="smsError"></div>
+      <button class="btn-sms" onclick="showEmailLogin()" style="margin-top:12px">&#8592; Back to email login</button>
+    </div>
+  </div>
+  <div id="recaptcha-container"></div>
+</div>
+</div>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content" id="heroContent">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Veteran-Owned &bull; Permian Basin</div>
+    <h1><span class="gold">Black Gold</span><br>Asset Transfer</h1>
+    <div class="hero-tagline">Dependability Delivered</div>
+    <p>Comprehensive chemical products and field services for drilling, completions, production, and midstream operations. When you need us, we're there.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary">Get Started <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#products" class="btn btn-outline">View Products</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-mouse"></div><span>Scroll</span></div>
+</section>
+
+<div class="page-content">
+<canvas id="oilfield-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;transition:opacity 0.8s"></canvas>
+<section class="stats-bar" style="position:relative;z-index:2"><div class="container"><div class="stats-grid">
+  <div class="stat-item reveal"><div class="stat-number">40+</div><div class="stat-label">Chemical Products</div></div>
+  <div class="stat-item reveal"><div class="stat-number">24/7</div><div class="stat-label">Availability</div></div>
+  <div class="stat-item reveal"><div class="stat-number">100%</div><div class="stat-label">Made in USA</div></div>
+  <div class="stat-item reveal"><div class="stat-number">Full</div><div class="stat-label">Analytical Lab</div></div>
+</div></div></section>
+
+<section id="about" class="section-pad"><div class="container"><div class="about-grid">
+  <div class="about-text reveal">
+    <div class="section-label">Who We Are</div>
+    <h3>Founded on <span class="gold">One Simple Principle</span></h3>
+    <p>BGAT was built on dependability. Innovation and exclusivity can be game changers, but they're irrelevant if you're not present when needed.</p>
+    <p>We provide comprehensive chemical solutions across the full lifecycle of oil and gas operations — from drilling and completions through production and midstream.</p>
+    <div class="about-values">
+      <div class="value-item"><div class="value-icon">&#9889;</div><div><h4>Superior Service</h4><p>Responsive support when you need it most</p></div></div>
+      <div class="value-item"><div class="value-icon">&#9670;</div><div><h4>High Quality</h4><p>Premium products backed by rigorous QA/QC</p></div></div>
+      <div class="value-item"><div class="value-icon">&#8594;</div><div><h4>Expediency</h4><p>Fast delivery, efficient implementation</p></div></div>
+    </div>
+  </div>
+  <div class="about-visual reveal"><div class="about-card">
+    <div class="about-card-title">Our Commitment to You</div>
+    <ul class="commitment-list">
+      <li>Strict consistency in every product and service</li>
+      <li>Unwavering loyalty to those who partner with us</li>
+      <li>Availability at all times — day or night</li>
+      <li>Maximizing value across your operations</li>
+      <li>Providing the highest quality chemical solutions</li>
+      <li>Optimizing treatment programs for peak performance</li>
+      <li>Veteran-owned with American-made products</li>
+    </ul>
+  </div></div>
+</div></div></section>
+
+<section id="products" class="section-pad"><div class="container">
+  <div class="section-header reveal"><div class="section-label">Product Portfolio</div><div class="section-title">Chemical Solutions for Every Phase</div><div class="section-divider"></div><div class="section-desc">From wellbore to pipeline, our comprehensive product line covers drilling, completions, production, and midstream.</div></div>
+  <div class="products-grid">
+    <div class="product-card reveal"><div class="product-icon">&#128297;</div><h3>Drilling & Completions</h3><ul class="product-list"><li>Drill Lubricants</li><li>Mud-Life Extenders</li><li>Nano-Surfactants</li><li>Clay Stabilizers</li><li>Gel-Breakers</li></ul></div>
+    <div class="product-card reveal"><div class="product-icon">&#128167;</div><h3>Phase Separation</h3><ul class="product-list"><li>De-emulsifiers</li><li>Water Clarifiers</li><li>Defoamers</li><li>Deliquification</li><li>Non-emulsifiers</li></ul></div>
+    <div class="product-card reveal"><div class="product-icon">&#128737;</div><h3>Asset Integrity</h3><ul class="product-list"><li>Corrosion Inhibitors</li><li>Bacteria Control</li><li>Gas Scavengers</li><li>Acid Inhibitors</li></ul></div>
+    <div class="product-card reveal"><div class="product-icon">&#128260;</div><h3>Flow Assurance</h3><ul class="product-list"><li>Paraffin / Asphaltene</li><li>Hydrate Inhibitor</li><li>Scale & Iron Control</li><li>Antifoulants</li></ul></div>
+    <div class="product-card reveal"><div class="product-icon">&#128200;</div><h3>Enhanced Oil Recovery</h3><ul class="product-list"><li>Charge Modifiers</li><li>EOR Surfactant</li></ul></div>
+  </div>
+</div></section>
+
+<section id="services" class="section-pad"><div class="container">
+  <div class="section-header reveal"><div class="section-label">Field Services</div><div class="section-title">Expert Support Across Operations</div><div class="section-divider"></div></div>
+  <div class="services-layout">
+    <div class="service-block reveal"><div class="service-block-icon">&#9881;</div><h3>Program Oversight</h3><ul><li>Inventory & Delivery</li><li>Cost Oversight</li><li>Injection Rates</li><li>Repairs & Reporting</li><li>System Monitoring</li></ul></div>
+    <div class="service-block reveal"><div class="service-block-icon">&#128300;</div><h3>Technical Consulting</h3><ul><li>Product Application</li><li>Survey / Auditing</li><li>Troubleshooting</li></ul></div>
+    <div class="service-block reveal"><div class="service-block-icon">&#129514;</div><h3>Analytical Services</h3><ul><li>Bacteria Counts</li><li>Water & Oil Analysis</li><li>Millipore & Oil-In-Water</li><li>QA/QC & Residuals</li><li>Solids & Failure Analysis</li></ul></div>
+  </div>
+</div></section>
+
+<section id="why-bgat" class="section-pad"><div class="container">
+  <div class="section-header reveal"><div class="section-label">The BGAT Difference</div><div class="section-title">Why Operators Choose Us</div><div class="section-divider"></div></div>
+  <div class="why-grid">
+    <div class="why-card reveal"><div class="why-number">01</div><div><h3>Always Available</h3><p>When you need chemical solutions at 2 AM on a Saturday, we answer. Dependability isn't a slogan — it's our founding principle.</p></div></div>
+    <div class="why-card reveal"><div class="why-number">02</div><div><h3>Full Lifecycle Coverage</h3><p>One partner from drill bit to pipeline. Consolidate vendors and simplify logistics.</p></div></div>
+    <div class="why-card reveal"><div class="why-number">03</div><div><h3>Lab-Backed Decisions</h3><p>Real data — bacteria counts, oil analysis, failure analysis — so treatment programs are optimized, not guessed.</p></div></div>
+    <div class="why-card reveal"><div class="why-number">04</div><div><h3>Veteran-Owned, USA-Made</h3><p>Built on discipline, integrity, and American manufacturing.</p></div></div>
+  </div>
+</div></section>
+
+<section class="cta-banner"><div class="container">
+  <h2>Ready to <span class="gold">Partner</span> With Us?</h2>
+  <p>Call us directly or fill out the form below.</p>
+  <div class="cta-phones">
+    <a href="tel:4325571293" class="cta-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(432) 557-1293</a>
+    <a href="tel:3258291945" class="cta-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(325) 829-1945</a>
+  </div>
+</div></section>
+
+<section id="contact" class="section-pad"><div class="container"><div class="contact-grid">
+  <div class="contact-info reveal">
+    <div class="section-label">Get In Touch</div>
+    <h3>Let's Talk About Your Operations</h3>
+    <p>Whether you need a full chemical program, analytical lab work, or a single product consultation — reach out.</p>
+    <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><strong>Phone</strong><span><a href="tel:4325571293">(432) 557-1293</a> | <a href="tel:3258291945">(325) 829-1945</a></span></div></div>
+    <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><strong>Service Area</strong><span>Permian Basin & Beyond</span></div></div>
+    <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9"/></svg></div><div><strong>Website</strong><span><a href="https://www.blackgoldasset.com" target="_blank">www.blackgoldasset.com</a></span></div></div>
+    <div class="badge-row"><div class="badge-item"><div class="badge-icon">&#127482;&#127480;</div>Veteran Owned</div><div class="badge-item"><div class="badge-icon">&#9733;</div>Made in USA</div></div>
+  </div>
+  <div class="contact-form reveal">
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-row"><div class="form-group"><label>Name</label><input type="text" required placeholder="Your name"></div><div class="form-group"><label>Company</label><input type="text" placeholder="Company name"></div></div>
+      <div class="form-row"><div class="form-group"><label>Email</label><input type="email" required placeholder="you@company.com"></div><div class="form-group"><label>Phone</label><input type="tel" placeholder="(432) 555-0000"></div></div>
+      <div class="form-group"><label>Interest</label><select><option value="">Select...</option><option>Drilling & Completions</option><option>Phase Separation</option><option>Asset Integrity</option><option>Flow Assurance</option><option>Enhanced Oil Recovery</option><option>Program Oversight</option><option>Lab Services</option><option>Consulting</option><option>General</option></select></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your operation..."></textarea></div>
+      <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+    </form>
+  </div>
+</div></div></section>
+
+<footer><div class="container">
+  <div class="footer-top"><div class="footer-brand"><h3>BGAT</h3><p>Black Gold Asset Transfer LLC</p></div><div class="footer-links"><a href="#about">About</a><a href="#products">Products</a><a href="#services">Services</a><a href="#contact">Contact</a></div></div>
+  <div class="footer-bottom"><p>&copy; 2025 Black Gold Asset Transfer LLC. All rights reserved.</p><p>Veteran-Owned &bull; Made in USA</p></div>
+  <div class="footer-powered"><div class="chromatic">Created &amp; Powered by Echo Prime Technologies</div><div class="sovereign">The Sovereign Architect &mdash; Bob McWilliams</div></div>
+</div></footer>
+</div>
+
+<!-- CHAT WIDGET -->
+<button id="ai-chat-fab" onclick="toggleChat()" aria-label="Chat with Lanny at BGAT">
+  <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke="#0A0A0A" stroke-width="2.5" fill="none"/></svg>
+</button>
+
+<div id="ai-chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">BG</div>
+      <div class="chat-header-info">
+        <h4>Lanny <span id="speakingInd" style="display:none" class="speaking-indicator"><span></span><span></span><span></span></span></h4>
+        <span><span class="chat-status-dot"></span> Online &bull; Voice AI</span>
+      </div>
+    </div>
+    <button class="chat-voice-toggle active" id="voiceToggle" onclick="toggleVoice()">&#128266; Voice</button>
+  </div>
+  <div class="chat-personality-bar">
+    <button class="personality-chip active" data-personality="field_expert" onclick="setPersonality(this)">Field Expert</button>
+    <button class="personality-chip" data-personality="sales" onclick="setPersonality(this)">Sales</button>
+    <button class="personality-chip" data-personality="lab_tech" onclick="setPersonality(this)">Lab</button>
+    <button class="personality-chip" data-personality="engineer" onclick="setPersonality(this)">Engineering</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area">
+    <input class="chat-input" id="chatInput" type="text" placeholder="Ask Lanny about products & services..." onkeydown="if(event.key==='Enter')sendMessage()">
+    <button class="chat-send" id="chatSend" onclick="sendMessage()">
+      <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+    </button>
+  </div>
+  <div class="chat-memory-bar">Cloud Memory: <span id="memoryCount">0</span> interactions &bull; Infinite recall</div>
+</div>
+
+<audio id="ttsAudio" style="display:none"></audio>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<!-- THREE.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// THREE.JS OIL RIG BLOWOUT
+(function(){
+'use strict';
+const canvas=document.getElementById('hero-canvas'),loader=document.getElementById('loader'),loaderFill=document.getElementById('loaderFill');
+let lp=0;function ul(p){lp=Math.max(lp,p);loaderFill.style.width=lp+'%';}
+const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
+R.setSize(window.innerWidth,window.innerHeight);R.setPixelRatio(Math.min(window.devicePixelRatio,2));
+R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=0.9;R.outputEncoding=THREE.sRGBEncoding;ul(10);
+const S=new THREE.Scene();S.fog=new THREE.FogExp2(0x040610,0.006);S.background=new THREE.Color(0x030510);
+const C=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,0.1,500);C.position.set(30,18,40);
+const clk=new THREE.Clock();
+const met=new THREE.MeshStandardMaterial({color:0x444444,metalness:0.85,roughness:0.35});
+const dmet=new THREE.MeshStandardMaterial({color:0x222222,metalness:0.9,roughness:0.4});
+const gmat=new THREE.MeshStandardMaterial({color:0xC8952E,metalness:0.8,roughness:0.3,emissive:0xC8952E,emissiveIntensity:0.15});ul(20);
+S.add(new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0x1a1108,roughness:0.95})).rotateX(-Math.PI/2));
+const DG=new THREE.Group();S.add(DG);
+[[-2.1,20,-2.1],[2.1,20,-2.1],[2.1,20,2.1],[-2.1,20,2.1]].forEach(p=>{const l=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.35,40,8),met);l.position.set(p[0],p[1],p[2]);l.castShadow=true;DG.add(l);});
+for(let y=4;y<38;y+=5)for(let s=0;s<4;s++){const b=new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,5,6),dmet);const a=s*Math.PI/2,f=1-(y/40)*0.5;b.position.set(Math.cos(a)*2.1*f,y,Math.sin(a)*2.1*f);b.rotation.set(0,a,Math.PI/4);DG.add(b);}
+for(let y=5;y<38;y+=8){const f=1-(y/40)*0.5;const r=new THREE.Mesh(new THREE.TorusGeometry(2.5*f,0.08,6,4),dmet);r.position.y=y;r.rotation.x=Math.PI/2;r.rotation.z=Math.PI/4;DG.add(r);}
+const cr=new THREE.Mesh(new THREE.BoxGeometry(2,1.5,2),gmat);cr.position.set(0,40.5,0);DG.add(cr);
+DG.add(new THREE.Mesh(new THREE.CylinderGeometry(0.4,0.4,42,12),dmet).translateY(21));
+const plat=new THREE.Mesh(new THREE.BoxGeometry(10,0.5,10),dmet);plat.position.y=0.25;DG.add(plat);
+DG.add(new THREE.Mesh(new THREE.BoxGeometry(10.2,0.08,10.2),gmat).translateY(0.55));ul(40);
+const tank=new THREE.Mesh(new THREE.CylinderGeometry(2.5,2.5,4,16),met);tank.position.set(-12,2,8);S.add(tank);
+S.add(new THREE.Mesh(new THREE.TorusGeometry(2.5,0.12,8,16),gmat).translateX(-12).translateY(4).translateZ(8).rotateX(Math.PI/2));
+const pb=new THREE.Mesh(new THREE.BoxGeometry(3,1.5,2),dmet);pb.position.set(14,0.75,-6);S.add(pb);
+const pa=new THREE.Mesh(new THREE.BoxGeometry(5,0.4,0.6),met);pa.position.set(14,2,-6);S.add(pa);ul(50);
+const pvs=`attribute float size;attribute float opacity;attribute vec3 customColor;varying float vO;varying vec3 vC;void main(){vO=opacity;vC=customColor;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_PointSize=size*(250.0/-mv.z);gl_Position=projectionMatrix*mv;}`;
+const pfs=`varying float vO;varying vec3 vC;void main(){float d=length(gl_PointCoord-vec2(0.5));if(d>0.5)discard;float a=smoothstep(0.5,0.1,d)*vO;gl_FragColor=vec4(vC,a);}`;
+function makePSys(count,initFn,blend){const pos=new Float32Array(count*3),sz=new Float32Array(count),op=new Float32Array(count),col=new Float32Array(count*3);const vel=new Float32Array(count*3),life=new Float32Array(count),maxL=new Float32Array(count);for(let i=0;i<count;i++)initFn(i,pos,vel,sz,op,col,life,maxL);const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));geo.setAttribute('size',new THREE.BufferAttribute(sz,1));geo.setAttribute('opacity',new THREE.BufferAttribute(op,1));geo.setAttribute('customColor',new THREE.BufferAttribute(col,3));const mat=new THREE.ShaderMaterial({vertexShader:pvs,fragmentShader:pfs,transparent:true,depthWrite:false,blending:blend||THREE.AdditiveBlending});const pts=new THREE.Points(geo,mat);S.add(pts);return{pos,vel,sz,op,col,life,maxL,geo,pts,count,initFn};}
+const oilD=new THREE.Color(0x1a0f00),oilM=new THREE.Color(0x3a2200),oilL=new THREE.Color(0x6b4400),oilG=new THREE.Color(0xC8952E);
+const fC=new THREE.Color(0xFFDD44),fM=new THREE.Color(0xFF8800),fO=new THREE.Color(0xCC3300),fS=new THREE.Color(0x332200);
+// GEYSER — oil shooting UP powerfully from wellhead
+const geyser=makePSys(5000,(i,p,v,s,o,c,l,m)=>{p[i*3]=(Math.random()-0.5)*0.8;p[i*3+1]=41+Math.random()*1;p[i*3+2]=(Math.random()-0.5)*0.8;const sp=25+Math.random()*40,sa=Math.random()*0.4,sd=Math.random()*Math.PI*2;v[i*3]=Math.cos(sd)*sa*sp*0.3;v[i*3+1]=sp;v[i*3+2]=Math.sin(sd)*sa*sp*0.3;s[i]=2+Math.random()*5;o[i]=0.75+Math.random()*0.25;const t=Math.random();const cl=t<0.2?oilD:t<0.45?oilM:t<0.75?oilL:oilG;c[i*3]=cl.r;c[i*3+1]=cl.g;c[i*3+2]=cl.b;l[i]=Math.random()*3;m[i]=2+Math.random()*3;});
+// FIRE — eruption fire mixed with oil
+const fire=makePSys(1200,(i,p,v,s,o,c,l,m)=>{p[i*3]=(Math.random()-0.5)*2.5;p[i*3+1]=42+Math.random()*8;p[i*3+2]=(Math.random()-0.5)*2.5;v[i*3]=(Math.random()-0.5)*4;v[i*3+1]=5+Math.random()*10;v[i*3+2]=(Math.random()-0.5)*4;s[i]=3+Math.random()*6;o[i]=0.5+Math.random()*0.4;const t=Math.random();const cl=t<0.25?fC:t<0.5?fM:t<0.8?fO:fS;c[i*3]=cl.r;c[i*3+1]=cl.g;c[i*3+2]=cl.b;l[i]=Math.random()*2;m[i]=2;});
+// SMOKE — billowing up
+const smoke=makePSys(600,(i,p,v,s,o,c,l,m)=>{p[i*3]=(Math.random()-0.5)*6;p[i*3+1]=55+Math.random()*20;p[i*3+2]=(Math.random()-0.5)*6;v[i*3]=(Math.random()-0.5)*2+1.5;v[i*3+1]=1+Math.random()*3;v[i*3+2]=(Math.random()-0.5)*2;s[i]=8+Math.random()*14;o[i]=0.08+Math.random()*0.15;const g=0.05+Math.random()*0.08;c[i*3]=g;c[i*3+1]=g*0.9;c[i*3+2]=g*0.7;l[i]=Math.random()*5;m[i]=5;},THREE.NormalBlending);
+// OIL RAIN — droplets falling back down everywhere like beautiful oily rain
+const drips=makePSys(1200,(i,p,v,s,o,c,l,m)=>{const a=Math.random()*Math.PI*2,r=3+Math.random()*40;p[i*3]=Math.cos(a)*r;p[i*3+1]=60+Math.random()*40;p[i*3+2]=Math.sin(a)*r;v[i*3]=(Math.random()-0.5)*3;v[i*3+1]=-4-Math.random()*12;v[i*3+2]=(Math.random()-0.5)*3;s[i]=0.8+Math.random()*2;o[i]=0.3+Math.random()*0.35;const t=Math.random();const cl=t<0.3?oilD:t<0.55?oilM:t<0.8?oilL:oilG;c[i*3]=cl.r;c[i*3+1]=cl.g;c[i*3+2]=cl.b;l[i]=Math.random()*6;m[i]=4+Math.random()*3;});
+// SPARKS from the wellhead
+const sparks=makePSys(300,(i,p,v,s,o,c,l,m)=>{p[i*3]=(Math.random()-0.5)*3;p[i*3+1]=42+Math.random()*4;p[i*3+2]=(Math.random()-0.5)*3;const sp=8+Math.random()*16,a=Math.random()*Math.PI*2;v[i*3]=Math.cos(a)*sp*0.5;v[i*3+1]=sp*0.8;v[i*3+2]=Math.sin(a)*sp*0.5;s[i]=0.3+Math.random()*0.8;o[i]=0.8+Math.random()*0.2;c[i*3]=1;c[i*3+1]=0.6+Math.random()*0.4;c[i*3+2]=0.1+Math.random()*0.3;l[i]=Math.random()*2;m[i]=2;});
+ul(70);
+const fl=new THREE.PointLight(0xFF6600,3,80,1.5);fl.position.set(0,48,0);fl.castShadow=true;S.add(fl);
+const fl2=new THREE.PointLight(0xCC4400,1.5,60,1.5);fl2.position.set(3,55,3);S.add(fl2);
+// MOONLIGHT — brighter silver-blue illumination
+S.add(new THREE.AmbientLight(0x1a2040,0.9));
+const moonDir=new THREE.DirectionalLight(0x99aadd,1.2);moonDir.position.set(-40,60,-30);moonDir.castShadow=true;S.add(moonDir);
+const moonFill=new THREE.DirectionalLight(0x6688bb,0.4);moonFill.position.set(20,40,-20);S.add(moonFill);
+const rl=new THREE.DirectionalLight(0xC8952E,0.4);rl.position.set(-20,30,-20);rl.castShadow=true;S.add(rl);
+S.add(new THREE.DirectionalLight(0x334466,0.5).translateX(20).translateY(10).translateZ(20));
+const gl=new THREE.PointLight(0xCC6600,0.8,40,2);gl.position.set(0,2,0);S.add(gl);
+// MOON — high detail with surface features
+const hMoonGeo=new THREE.SphereGeometry(6,64,64);
+// Generate procedural moon surface
+const hMoonMat=new THREE.MeshStandardMaterial({color:0xdde4f0,emissive:0xaabbdd,emissiveIntensity:0.3,roughness:0.8,metalness:0.05});
+// Add craters via bump — use vertex displacement
+const hMoonVerts=hMoonGeo.attributes.position;
+for(let i=0;i<hMoonVerts.count;i++){
+  const x=hMoonVerts.getX(i),y=hMoonVerts.getY(i),z=hMoonVerts.getZ(i);
+  const n=Math.sin(x*3.1)*Math.cos(y*2.7)*Math.sin(z*4.3)*0.15+Math.sin(x*7)*Math.cos(z*5)*0.08+Math.sin(y*11+x*9)*0.04;
+  const len=Math.sqrt(x*x+y*y+z*z);
+  hMoonVerts.setXYZ(i,x+x/len*n,y+y/len*n,z+z/len*n);
+}
+hMoonGeo.computeVertexNormals();
+const hMoon=new THREE.Mesh(hMoonGeo,hMoonMat);
+hMoon.position.set(-90,80,-120);S.add(hMoon);
+// Moon glow layers
+const hMoonHalo=new THREE.Mesh(new THREE.SphereGeometry(14,32,32),new THREE.MeshBasicMaterial({color:0x8899cc,transparent:true,opacity:0.08}));
+hMoonHalo.position.copy(hMoon.position);S.add(hMoonHalo);
+const hMoonGlow=new THREE.Mesh(new THREE.SphereGeometry(22,32,32),new THREE.MeshBasicMaterial({color:0x667799,transparent:true,opacity:0.04}));
+hMoonGlow.position.copy(hMoon.position);S.add(hMoonGlow);
+// Moon point light for ground illumination
+const moonPt=new THREE.PointLight(0x8899cc,0.6,300,1.5);moonPt.position.copy(hMoon.position);S.add(moonPt);
+// HERO STARS — dense night sky
+const hStarCount=4000;
+const hsg=new THREE.BufferGeometry(),hsp=new Float32Array(hStarCount*3),hss=new Float32Array(hStarCount);
+for(let i=0;i<hStarCount;i++){
+  const theta=Math.random()*Math.PI*2,phi=Math.random()*Math.PI*0.5;
+  const r=120+Math.random()*180;
+  hsp[i*3]=Math.cos(theta)*Math.sin(phi)*r;
+  hsp[i*3+1]=30+Math.cos(phi)*r;
+  hsp[i*3+2]=Math.sin(theta)*Math.sin(phi)*r-80;
+  hss[i]=0.15+Math.random()*0.8;
+}
+hsg.setAttribute('position',new THREE.BufferAttribute(hsp,3));
+hsg.setAttribute('size',new THREE.BufferAttribute(hss,1));
+S.add(new THREE.Points(hsg,new THREE.PointsMaterial({color:0xffeedd,size:0.6,transparent:true,opacity:0.55,sizeAttenuation:true})));
+// ORION CONSTELLATION — recognizable pattern
+const orionData=[
+  {n:'Betelgeuse',x:-12,y:82,z:-150,s:2.8,c:0xffaa66},
+  {n:'Rigel',x:8,y:62,z:-150,s:2.6,c:0xaaccff},
+  {n:'Bellatrix',x:8,y:80,z:-150,s:2.0,c:0xbbddff},
+  {n:'Saiph',x:-10,y:64,z:-150,s:1.8,c:0xbbccee},
+  {n:'Alnitak',x:-3,y:73,z:-150,s:1.6,c:0xddeeff},
+  {n:'Alnilam',x:0,y:73,z:-150,s:1.8,c:0xddeeff},
+  {n:'Mintaka',x:3,y:73,z:-150,s:1.5,c:0xddeeff},
+  {n:'Meissa',x:-1,y:86,z:-150,s:1.3,c:0xddeeff},
+  {n:'Nebula1',x:-1,y:69,z:-150,s:1.0,c:0xffbbbb},
+  {n:'Nebula2',x:0.5,y:68,z:-150,s:0.8,c:0xffcccc},
+  {n:'Nebula3',x:-2,y:67.5,z:-150,s:0.7,c:0xeebb99}
+];
+const orionGeo=new THREE.BufferGeometry();
+const orionPos=new Float32Array(orionData.length*3),orionSz=new Float32Array(orionData.length),orionCol=new Float32Array(orionData.length*3);
+orionData.forEach((s,i)=>{
+  orionPos[i*3]=s.x;orionPos[i*3+1]=s.y;orionPos[i*3+2]=s.z;
+  orionSz[i]=s.s;
+  const c=new THREE.Color(s.c);orionCol[i*3]=c.r;orionCol[i*3+1]=c.g;orionCol[i*3+2]=c.b;
+});
+orionGeo.setAttribute('position',new THREE.BufferAttribute(orionPos,3));
+orionGeo.setAttribute('size',new THREE.BufferAttribute(orionSz,1));
+const orionMat=new THREE.PointsMaterial({color:0xffffff,size:2,transparent:true,opacity:0.85,sizeAttenuation:true});
+S.add(new THREE.Points(orionGeo,orionMat));
+// Orion belt line — faint connection
+const beltLine=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-3,73,-149),new THREE.Vector3(0,73,-149),new THREE.Vector3(3,73,-149)]);
+S.add(new THREE.Line(beltLine,new THREE.LineBasicMaterial({color:0x4466aa,transparent:true,opacity:0.12})));
+// Orion nebula glow (M42) — subtle pink/red cloud
+const nebGeo=new THREE.SphereGeometry(3,16,16);
+const nebMat=new THREE.MeshBasicMaterial({color:0xff6688,transparent:true,opacity:0.06});
+const nebMesh=new THREE.Mesh(nebGeo,nebMat);nebMesh.position.set(-0.5,68.5,-148);S.add(nebMesh);
+// HERO SHOOTING STARS
+const hShooters=[];
+function makeHeroShooter(){
+  const g=new THREE.BufferGeometry(),n=6,p=new Float32Array(n*3);
+  const sx=-80+Math.random()*160,sy=60+Math.random()*50,sz=-60-Math.random()*40;
+  for(let i=0;i<n;i++){p[i*3]=sx;p[i*3+1]=sy;p[i*3+2]=sz;}
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));
+  const m=new THREE.PointsMaterial({color:0xffeedd,size:1.2,transparent:true,opacity:0,sizeAttenuation:true});
+  const pts=new THREE.Points(g,m);S.add(pts);
+  return{p,g,m,pts,x:sx,y:sy,z:sz,vx:20+Math.random()*20,vy:-10-Math.random()*8,vz:Math.random()*5,life:0,max:1.5+Math.random()*2,on:false,n};
+}
+for(let i=0;i<3;i++)hShooters.push(makeHeroShooter());
+let hNextShoot=15+Math.random()*30;
+// COMET — rare celestial event (~every 30 min)
+const cometTrailLen=40;
+const cometPos=new Float32Array(cometTrailLen*3),cometSz=new Float32Array(cometTrailLen);
+for(let i=0;i<cometTrailLen;i++){cometPos[i*3]=-999;cometPos[i*3+1]=-999;cometPos[i*3+2]=-200;cometSz[i]=Math.max(0.2,(1-i/cometTrailLen)*3);}
+const cometGeo=new THREE.BufferGeometry();
+cometGeo.setAttribute('position',new THREE.BufferAttribute(cometPos,3));
+cometGeo.setAttribute('size',new THREE.BufferAttribute(cometSz,1));
+const cometMat=new THREE.PointsMaterial({color:0xccddff,size:2.5,transparent:true,opacity:0,sizeAttenuation:true});
+const cometPts=new THREE.Points(cometGeo,cometMat);S.add(cometPts);
+// Comet coma glow
+const comaGeo=new THREE.SphereGeometry(2,16,16);
+const comaMat=new THREE.MeshBasicMaterial({color:0x99bbdd,transparent:true,opacity:0});
+const coma=new THREE.Mesh(comaGeo,comaMat);S.add(coma);
+let cometState={active:false,x:0,y:0,z:-140,vx:0,vy:0,life:0,maxLife:0,nextComet:1800+Math.random()*600};
+function launchComet(){
+  const fromLeft=Math.random()>0.5;
+  cometState={active:true,x:fromLeft?-140:140,y:60+Math.random()*40,z:-140,
+    vx:fromLeft?3+Math.random()*2:-(3+Math.random()*2),vy:-0.3-Math.random()*0.5,
+    life:0,maxLife:25+Math.random()*15,nextComet:0};
+  for(let i=0;i<cometTrailLen;i++){cometPos[i*3]=cometState.x;cometPos[i*3+1]=cometState.y;cometPos[i*3+2]=cometState.z;}
+}
+ul(85);
+let mx=0,my=0;document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2;});
+let sy2=0;window.addEventListener('scroll',()=>{sy2=window.scrollY;});
+window.addEventListener('resize',()=>{C.aspect=window.innerWidth/window.innerHeight;C.updateProjectionMatrix();R.setSize(window.innerWidth,window.innerHeight);});
+function updateSys(sys,dt,grav,resetCheck){for(let i=0;i<sys.count;i++){sys.life[i]+=dt;if(resetCheck(i,sys)){sys.initFn(i,sys.pos,sys.vel,sys.sz,sys.op,sys.col,sys.life,sys.maxL);sys.life[i]=0;continue;}sys.vel[i*3+1]+=grav*dt;sys.pos[i*3]+=sys.vel[i*3]*dt;sys.pos[i*3+1]+=sys.vel[i*3+1]*dt;sys.pos[i*3+2]+=sys.vel[i*3+2]*dt;const lf=sys.life[i]/sys.maxL[i];sys.op[i]=Math.max(0,(1-lf)*0.7);}sys.geo.attributes.position.needsUpdate=true;sys.geo.attributes.size.needsUpdate=true;sys.geo.attributes.opacity.needsUpdate=true;}
+ul(95);
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clk.getDelta(),0.05),el=clk.getElapsedTime();
+C.position.x=Math.cos(el*0.08)*42+mx*3;C.position.z=Math.sin(el*0.08)*42+my*2;C.position.y=18+my*-2+sy2*0.01;C.lookAt(0,22+sy2*0.005,0);
+fl.intensity=3.5+Math.sin(el*12)*1+Math.sin(el*7.3)*0.6+Math.sin(el*19)*0.3;fl2.intensity=2+Math.sin(el*9)*0.6+Math.sin(el*15)*0.3;gl.intensity=1+Math.sin(el*8)*0.4;
+const gp=0.8+Math.sin(el*2)*0.2;
+updateSys(geyser,dt*gp,-4.9,(i,s)=>s.life[i]>s.maxL[i]);
+updateSys(fire,dt,0,(i,s)=>s.life[i]>2);
+updateSys(smoke,dt,0,(i,s)=>s.life[i]>5);
+updateSys(drips,dt,-6,(i,s)=>s.life[i]>s.maxL[i]||s.pos[i*3+1]<-5);
+updateSys(sparks,dt,-3,(i,s)=>s.life[i]>2);
+pa.rotation.z=Math.sin(el*1.5)*0.15;
+DG.position.x=Math.sin(el*14)*0.02;DG.position.z=Math.cos(el*11)*0.015;
+// Star twinkle
+for(let i=0;i<hStarCount;i++){hss[i]=0.15+Math.abs(Math.sin(el*0.4+i*0.9))*0.7;}
+hsg.attributes.size.needsUpdate=true;
+// Moon halo pulse + glow
+hMoonHalo.material.opacity=0.06+Math.sin(el*0.25)*0.03;
+hMoonGlow.material.opacity=0.03+Math.sin(el*0.15)*0.015;
+hMoon.rotation.y=el*0.01;
+// Orion star twinkle
+for(let i=0;i<orionData.length;i++){orionSz[i]=orionData[i].s*(0.8+Math.sin(el*0.6+i*2.1)*0.25);}
+orionGeo.attributes.size.needsUpdate=true;
+nebMesh.material.opacity=0.04+Math.sin(el*0.3)*0.025;
+// Hero shooting stars
+hNextShoot-=dt;
+if(hNextShoot<=0){const s=hShooters.find(s=>!s.on);if(s){s.x=-80+Math.random()*160;s.y=60+Math.random()*50;s.z=-60-Math.random()*40;s.vx=20+Math.random()*20;s.vy=-10-Math.random()*8;s.life=0;s.on=true;}hNextShoot=20+Math.random()*40;}
+hShooters.forEach(s=>{if(!s.on)return;s.life+=dt;if(s.life>s.max){s.on=false;s.m.opacity=0;return;}
+s.x+=s.vx*dt;s.y+=s.vy*dt;s.z+=s.vz*dt;
+for(let i=s.n-1;i>0;i--){s.p[i*3]=s.p[(i-1)*3];s.p[i*3+1]=s.p[(i-1)*3+1];s.p[i*3+2]=s.p[(i-1)*3+2];}
+s.p[0]=s.x;s.p[1]=s.y;s.p[2]=s.z;s.m.opacity=0.7*(1-s.life/s.max);s.g.attributes.position.needsUpdate=true;});
+// COMET — rare majestic traverse
+if(!cometState.active){cometState.nextComet-=dt;if(cometState.nextComet<=0)launchComet();}
+else{
+  cometState.life+=dt;
+  if(cometState.life>cometState.maxLife){cometState.active=false;cometMat.opacity=0;comaMat.opacity=0;cometState.nextComet=1800+Math.random()*600;}
+  else{
+    cometState.x+=cometState.vx*dt;cometState.y+=cometState.vy*dt;
+    for(let i=cometTrailLen-1;i>0;i--){cometPos[i*3]=cometPos[(i-1)*3];cometPos[i*3+1]=cometPos[(i-1)*3+1];cometPos[i*3+2]=cometPos[(i-1)*3+2];}
+    cometPos[0]=cometState.x;cometPos[1]=cometState.y;cometPos[2]=cometState.z;
+    const cf=cometState.life<2?cometState.life/2:cometState.life>cometState.maxLife-3?(cometState.maxLife-cometState.life)/3:1;
+    cometMat.opacity=0.7*cf;comaMat.opacity=0.15*cf;
+    coma.position.set(cometState.x,cometState.y,cometState.z+2);
+    cometGeo.attributes.position.needsUpdate=true;
+  }
+}
+R.render(S,C);}
+ul(100);setTimeout(()=>{loader.classList.add('hidden');document.getElementById('heroContent').classList.add('animate');animate();},800);
+})();
+
+// ============================================================
+//  AI CHAT — LANNY VOICE + EMOTION + CLOUD MEMORY + TTS
+// ============================================================
+(function(){
+'use strict';
+const API='https://bgat-chat-api.bmcii1976.workers.dev';
+let SESSION_ID='bgat_'+Math.random().toString(36).slice(2,10)+'_'+Date.now();
+window.updateBGATSession=function(uid){SESSION_ID='bgat_user_'+uid;};
+let currentPersonality='field_expert';
+let chatHistory=[];
+let isProcessing=false;
+let voiceEnabled=true;
+let interactionCount=0;
+// Audio playback via Web Audio API (AudioContext) — no HTML element needed
+const panel=document.getElementById('ai-chat-panel');
+const fab=document.getElementById('ai-chat-fab');
+const messagesEl=document.getElementById('chatMessages');
+const inputEl=document.getElementById('chatInput');
+const sendBtn=document.getElementById('chatSend');
+const speakInd=document.getElementById('speakingInd');
+
+window.toggleChat=function(){
+  const open=panel.classList.toggle('open');
+  fab.classList.toggle('open',open);
+  if(open&&messagesEl.children.length===0)showWelcome();
+  if(open)setTimeout(()=>inputEl.focus(),300);
+};
+
+window.toggleVoice=function(){
+  voiceEnabled=!voiceEnabled;
+  const btn=document.getElementById('voiceToggle');
+  btn.classList.toggle('active',voiceEnabled);
+  btn.innerHTML=voiceEnabled?'&#128266; Voice':'&#128263; Muted';
+  if(!voiceEnabled){if(currentSource){try{currentSource.stop();}catch(e){}}speakInd.style.display='none';}
+};
+
+window.setPersonality=function(el){
+  document.querySelectorAll('.personality-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  currentPersonality=el.dataset.personality;
+  const labels={field_expert:'Field Expert',sales:'Sales',lab_tech:'Lab & Analytics',engineer:'Engineering'};
+  addMessage('assistant','Switching to '+labels[currentPersonality]+' mode. What can I help with?','LANNY');
+};
+
+function showWelcome(){
+  addMessage('assistant',"Hey there. Lanny here at Black Gold Asset Transfer. Whether you need help picking the right chemical program, wanna know about our lab services, or just have a question about your operation — fire away. I'm here.",'LANNY');
+  document.getElementById('memoryCount').textContent=interactionCount;
+}
+
+function addMessage(role,content,label){
+  const div=document.createElement('div');
+  div.className='chat-msg '+role;
+  let html='';
+  if(label)html+='<span class="msg-personality">'+label+'</span>';
+  html+=content;
+  div.innerHTML=html;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+}
+
+function showThinking(text){
+  const div=document.createElement('div');
+  div.className='chat-thinking';
+  div.id='thinkingEl';
+  div.textContent=text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop=messagesEl.scrollHeight;
+}
+
+function updateThinking(text){
+  const el=document.getElementById('thinkingEl');
+  if(el)el.textContent=text;
+}
+
+function hideThinking(){
+  const el=document.getElementById('thinkingEl');
+  if(el)el.remove();
+}
+
+function splitIntoChunks(text,maxLen){
+  const chunks=[];
+  let remaining=text;
+  while(remaining.length>0){
+    if(remaining.length<=maxLen){chunks.push(remaining);break;}
+    let splitAt=-1;
+    for(let i=Math.min(maxLen,remaining.length)-1;i>=maxLen*0.4;i--){
+      if('.!?'.includes(remaining[i])){splitAt=i+1;break;}
+    }
+    if(splitAt===-1){
+      for(let i=Math.min(maxLen,remaining.length)-1;i>=maxLen*0.3;i--){
+        if(',;:'.includes(remaining[i])){splitAt=i+1;break;}
+      }
+    }
+    if(splitAt===-1)splitAt=maxLen;
+    chunks.push(remaining.slice(0,splitAt).trim());
+    remaining=remaining.slice(splitAt).trim();
+  }
+  return chunks.filter(c=>c.length>0);
+}
+
+async function fetchChunkAudio(text,emotion){
+  try{
+    const resp=await fetch(API+'/tts',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({text,emotion})
+    });
+    if(!resp.ok){console.warn('TTS API error:',resp.status);return null;}
+    const blob=await resp.blob();
+    if(blob.size<100){console.warn('TTS empty audio');return null;}
+    return blob;
+  }catch(e){console.warn('TTS fetch error:',e);return null;}
+}
+
+let isSpeaking=false;
+let audioCtx=null;
+let currentSource=null;
+
+function getAudioCtx(){
+  if(!audioCtx||audioCtx.state==='closed')audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  return audioCtx;
+}
+// Unlock AudioContext on ANY user gesture
+function unlockAudio(){
+  const ctx=getAudioCtx();
+  if(ctx.state==='suspended')ctx.resume();
+}
+document.addEventListener('click',unlockAudio,{once:false});
+document.addEventListener('touchstart',unlockAudio,{once:false});
+document.addEventListener('keydown',unlockAudio,{once:false});
+
+function playBlob(blob){
+  return new Promise(async(resolve)=>{
+    try{
+      const ctx=getAudioCtx();
+      const arrayBuf=await blob.arrayBuffer();
+      const audioBuf=await ctx.decodeAudioData(arrayBuf);
+      if(currentSource){try{currentSource.stop();}catch(e){}}
+      const source=ctx.createBufferSource();
+      source.buffer=audioBuf;
+      source.connect(ctx.destination);
+      currentSource=source;
+      source.onended=()=>{currentSource=null;resolve();};
+      source.start(0);
+      console.log('TTS playing chunk:',Math.round(audioBuf.duration)+'s');
+    }catch(e){
+      console.warn('Audio decode/play error:',e);
+      resolve();
+    }
+  });
+}
+
+async function speakText(text,emotion){
+  if(!voiceEnabled)return;
+  if(currentSource){try{currentSource.stop();}catch(e){}}
+  isSpeaking=false;
+  const chunks=splitIntoChunks(text,200);
+  if(chunks.length===0)return;
+  speakInd.style.display='inline-flex';
+  isSpeaking=true;
+  // Fetch all chunks in parallel, play sequentially
+  const fetchPromises=chunks.map(c=>fetchChunkAudio(c,emotion));
+  try{
+    for(let i=0;i<fetchPromises.length;i++){
+      const blob=await fetchPromises[i];
+      if(!blob)continue;
+      await playBlob(blob);
+    }
+  }catch(e){console.warn('speakText error:',e);}
+  isSpeaking=false;
+  speakInd.style.display='none';
+}
+
+// Expose for cross-IIFE access (sovereign greeting)
+window.addMessage=addMessage;
+window.speakText=speakText;
+
+window.sendMessage=async function(){
+  if(isProcessing)return;
+  unlockAudio();
+  const text=inputEl.value.trim();
+  if(!text)return;
+  inputEl.value='';
+  addMessage('user',text);
+  isProcessing=true;
+  sendBtn.disabled=true;
+  showThinking('Loading memory...');
+  await new Promise(r=>setTimeout(r,400));
+  updateThinking('Thinking...');
+
+  try{
+    const resp=await fetch(API+'/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        message:text,
+        personality:currentPersonality,
+        session_id:SESSION_ID,
+        history:chatHistory.slice(-8),
+        user_context:window.BGAT_USER_CONTEXT||null
+      })
+    });
+    const data=await resp.json();
+    hideThinking();
+    if(data.error){
+      addMessage('assistant',"Having a technical hiccup. Call us at <strong>(432) 557-1293</strong> — we're 24/7.",'LANNY');
+    }else{
+      addMessage('assistant',data.reply,data.personality||'LANNY');
+      chatHistory.push({role:'user',content:text});
+      chatHistory.push({role:'assistant',content:data.reply});
+      interactionCount++;
+      document.getElementById('memoryCount').textContent=interactionCount;
+      speakText(data.reply,data.emotion||'friendly');
+    }
+  }catch(e){
+    hideThinking();
+    addMessage('assistant',"Connection issue. Give us a call at <strong>(432) 557-1293</strong> or <strong>(325) 829-1945</strong>.",'LANNY');
+  }
+  isProcessing=false;
+  sendBtn.disabled=false;
+  inputEl.focus();
+};
+})();
+
+// UI SCRIPTS
+const nav=document.getElementById('navbar');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>navLinks.classList.remove('open')));
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target);}});},{threshold:0.1});
+reveals.forEach(el=>observer.observe(el));
+function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('button[type="submit"]');const o=b.innerHTML;b.innerHTML='Sent &#10003;';b.style.background='#2a7d3f';setTimeout(()=>{b.innerHTML=o;b.style.background='';e.target.reset();},3000);}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});});});
+
+// ============================================================
+//  FIREBASE AUTH
+// ============================================================
+(function(){
+'use strict';
+const fbConfig={apiKey:"AIzaSyCuTHwqo6HPjR0oSlCnWBkRslXTZg41VWY",authDomain:"echo-prime-ai.firebaseapp.com",projectId:"echo-prime-ai",storageBucket:"echo-prime-ai.firebasestorage.app",messagingSenderId:"249995513427",appId:"1:249995513427:web:0d16c5c1f7b19a5eb140a6"};
+const app=firebase.initializeApp(fbConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
+let confirmationResult=null;
+
+window.openAuthModal=function(){document.getElementById('authOverlay').classList.add('open');};
+window.closeAuthModal=function(){document.getElementById('authOverlay').classList.remove('open');};
+window.switchAuthTab=function(tab,el){
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.auth-form').forEach(f=>f.classList.remove('active'));
+  document.getElementById(tab==='login'?'authLogin':'authRegister').classList.add('active');
+};
+window.showSmsLogin=function(){
+  document.querySelectorAll('.auth-form').forEach(f=>f.classList.remove('active'));
+  document.getElementById('authSms').classList.add('active');
+};
+window.showEmailLogin=function(){
+  document.querySelectorAll('.auth-form').forEach(f=>f.classList.remove('active'));
+  document.getElementById('authLogin').classList.add('active');
+};
+
+function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),5000);}
+
+// ─── VIP USER TIERS ──────────────────────────────────
+// Auth 11: Commander (Echo Prime owner, built the system)
+// Auth 9:  BGAT Owner JB (owns the company)
+// Auth 8:  Lanny Owens (the real Lanny, senior specialist)
+// All VIPs get Grok (unfiltered), oilfield language, full access
+const VIP_USERS={
+  // Commander — Echo Prime Technologies
+  'bmcii1976@gmail.com':      {role:'sovereign_architect',auth:11,name:'Commander McWilliams',display:'Commander McWilliams',avatar:'\u2654',color:'linear-gradient(135deg,#C8952E,#E8B84B)',greeting:'Commander McWilliams. Welcome back, sir. All systems operational. What can I do for you today?'},
+  'bobmcwilliams4@outlook.com':{role:'sovereign_architect',auth:11,name:'Commander McWilliams',display:'Commander McWilliams',avatar:'\u2654',color:'linear-gradient(135deg,#C8952E,#E8B84B)',greeting:'Commander. Good to see you, sir. What do you need?'},
+  'bob@echo-op.com':          {role:'sovereign_architect',auth:11,name:'Commander McWilliams',display:'Commander McWilliams',avatar:'\u2654',color:'linear-gradient(135deg,#C8952E,#E8B84B)',greeting:'Commander. Systems are green. Ready when you are, sir.'},
+  'bob@echo-lge.com':         {role:'sovereign_architect',auth:11,name:'Commander McWilliams',display:'Commander McWilliams',avatar:'\u2654',color:'linear-gradient(135deg,#C8952E,#E8B84B)',greeting:'Commander McWilliams. What can I do for you today, sir?'},
+  // JB — BGAT Owner (ADD HIS REAL EMAIL HERE)
+  'jb@blackgoldasset.com':    {role:'bgat_owner',auth:9,name:'JB',display:'JB',avatar:'JB',color:'linear-gradient(135deg,#1a6b3c,#2ecc71)',greeting:'Hey JB. Good to see you, boss. What do you need from me today?'},
+  'jb@bgat.com':              {role:'bgat_owner',auth:9,name:'JB',display:'JB',avatar:'JB',color:'linear-gradient(135deg,#1a6b3c,#2ecc71)',greeting:'JB, welcome back. Everything is running smooth. What can I help with?'},
+  // Lanny Owens — The Real Lanny (ADD HIS REAL EMAIL HERE)
+  'lanny@blackgoldasset.com': {role:'bgat_lanny',auth:8,name:'Lanny Owens',display:'Lanny',avatar:'LO',color:'linear-gradient(135deg,#8B4513,#D2691E)',greeting:'Well well well... the REAL Lanny is here. I\'m just your digital twin, brother. What do you need?'},
+  'lanny@bgat.com':           {role:'bgat_lanny',auth:8,name:'Lanny Owens',display:'Lanny',avatar:'LO',color:'linear-gradient(135deg,#8B4513,#D2691E)',greeting:'The man himself. Good to see you, Lanny. What are we working on?'}
+};
+window.BGAT_USER_CONTEXT=null;
+
+function onAuth(user){
+  if(!user)return;
+  document.getElementById('navSignIn').style.display='none';
+  const info=document.getElementById('navUserInfo');
+  info.classList.add('active');
+  const email=(user.email||'').toLowerCase();
+  const vip=VIP_USERS[email]||null;
+  const isVIP=!!vip;
+  const name=isVIP?vip.display:(user.displayName||user.email||user.phoneNumber||'User');
+  document.getElementById('navUserName').textContent=name;
+  document.getElementById('navAvatar').textContent=isVIP?vip.avatar:(name[0]||'U').toUpperCase();
+  if(isVIP)document.getElementById('navAvatar').style.background=vip.color;
+  if(window.updateBGATSession)window.updateBGATSession(user.uid);
+  closeAuthModal();
+  // Set user context for AI — VIPs get elevated context, customers get basic
+  if(isVIP){
+    window.BGAT_USER_CONTEXT={role:vip.role,auth_level:vip.auth,name:vip.name,title:vip.role,directive:vip.role};
+  }else{
+    window.BGAT_USER_CONTEXT={role:'customer',name:user.displayName||'Guest',email:email};
+  }
+  // Store user profile in Firestore
+  db.collection('bgat_users').doc(user.uid).set({
+    email:email||null,
+    displayName:user.displayName||null,
+    phone:user.phoneNumber||null,
+    isVIP:isVIP,
+    vipRole:isVIP?vip.role:null,
+    authLevel:isVIP?vip.auth:0,
+    lastLogin:firebase.firestore.FieldValue.serverTimestamp(),
+    provider:user.providerData[0]?.providerId||'unknown'
+  },{merge:true}).catch(()=>{});
+  console.log('Auth:',email,'VIP:',isVIP,'role:',isVIP?vip.role:'customer','context:',window.BGAT_USER_CONTEXT);
+  // Auto-greet VIPs — open chat and send personalized welcome
+  if(isVIP&&vip.greeting){
+    setTimeout(()=>{
+      const panel=document.getElementById('chatPanel');
+      if(panel&&!panel.classList.contains('open')&&window.toggleChat)window.toggleChat();
+      if(window.addMessage){
+        window.addMessage('assistant',vip.greeting,'LANNY');
+        if(window.speakText)window.speakText(vip.greeting,'warm');
+      }
+    },1200);
+  }
+}
+
+auth.onAuthStateChanged(function(user){
+  if(user){onAuth(user);}else{
+    document.getElementById('navSignIn').style.display='';
+    document.getElementById('navUserInfo').classList.remove('active');
+  }
+});
+
+window.googleSignIn=async function(){
+  try{
+    const provider=new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    const result=await auth.signInWithPopup(provider);
+    onAuth(result.user);
+  }catch(e){showError('loginError',e.message);}
+};
+
+window.emailSignIn=async function(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPass').value;
+  if(!email||!pass){showError('loginError','Enter email and password');return;}
+  try{
+    const result=await auth.signInWithEmailAndPassword(email,pass);
+    onAuth(result.user);
+  }catch(e){showError('loginError',e.code==='auth/wrong-password'?'Invalid password':e.code==='auth/user-not-found'?'Account not found':e.message);}
+};
+
+window.emailRegister=async function(){
+  const email=document.getElementById('regEmail').value.trim();
+  const pass=document.getElementById('regPass').value;
+  const first=document.getElementById('regFirst').value.trim();
+  const last=document.getElementById('regLast').value.trim();
+  const company=document.getElementById('regCompany').value.trim();
+  const contact=document.getElementById('regContact').value.trim();
+  const industry=document.getElementById('regIndustry').value;
+  const address=document.getElementById('regAddress').value.trim();
+  if(!email||!pass){showError('regError','Email and password required');return;}
+  if(pass.length<6){showError('regError','Password must be at least 6 characters');return;}
+  try{
+    const result=await auth.createUserWithEmailAndPassword(email,pass);
+    await result.user.updateProfile({displayName:first+(last?' '+last:'')});
+    await db.collection('bgat_users').doc(result.user.uid).set({
+      email,displayName:first+(last?' '+last:''),
+      company,contact,industry,address,
+      createdAt:firebase.firestore.FieldValue.serverTimestamp(),
+      provider:'email'
+    },{merge:true});
+    onAuth(result.user);
+  }catch(e){showError('regError',e.code==='auth/email-already-in-use'?'Email already registered':e.message);}
+};
+
+window.sendSmsCode=async function(){
+  const phone=document.getElementById('smsPhone').value.trim();
+  if(!phone){showError('smsError','Enter phone number');return;}
+  try{
+    if(!window.recaptchaVerifier){
+      window.recaptchaVerifier=new firebase.auth.RecaptchaVerifier('recaptcha-container',{size:'invisible'});
+    }
+    confirmationResult=await auth.signInWithPhoneNumber(phone,window.recaptchaVerifier);
+    document.getElementById('smsCodeGroup').style.display='block';
+    document.getElementById('smsVerifyBtn').style.display='';
+    document.getElementById('smsSendBtn').textContent='Code Sent';
+  }catch(e){showError('smsError',e.message);}
+};
+
+window.verifySmsCode=async function(){
+  const code=document.getElementById('smsCode').value.trim();
+  if(!code||!confirmationResult){showError('smsError','Enter the code');return;}
+  try{
+    const result=await confirmationResult.confirm(code);
+    onAuth(result.user);
+  }catch(e){showError('smsError','Invalid code');}
+};
+
+window.signOutUser=async function(){
+  await auth.signOut();
+  if(window.updateBGATSession)window.updateBGATSession(Math.random().toString(36).slice(2));
+};
+})();
+
+// ============================================================
+//  OILFIELD BACKGROUND — MOONLIT NIGHT SKY + PUMP JACKS + FLARES
+// ============================================================
+(function(){
+'use strict';
+const ofc=document.getElementById('oilfield-canvas');
+if(!ofc)return;
+const R2=new THREE.WebGLRenderer({canvas:ofc,alpha:true,antialias:false,powerPreference:'high-performance'});
+R2.setSize(window.innerWidth,window.innerHeight);
+R2.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
+const S2=new THREE.Scene();
+// Camera low — horizon at bottom of frame
+const C2=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,0.5,600);
+C2.position.set(0,2,60);C2.lookAt(0,12,0);
+const clk2=new THREE.Clock();
+
+// GROUND — dark flat desert floor at very bottom
+const groundMat=new THREE.MeshStandardMaterial({color:0x0a0800,roughness:0.95,transparent:true,opacity:0.4});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(600,200),groundMat);
+ground.rotation.x=-Math.PI/2;ground.position.y=-0.5;S2.add(ground);
+
+// MOONLIGHT — brighter silver-blue
+const moonLight=new THREE.DirectionalLight(0x99aadd,1.0);
+moonLight.position.set(-40,60,-30);S2.add(moonLight);
+const moonFill2=new THREE.DirectionalLight(0x6688bb,0.35);moonFill2.position.set(30,40,-20);S2.add(moonFill2);
+// Moon — high detail with craters
+const bgMoonGeo=new THREE.SphereGeometry(5,64,64);
+const bgMoonMat=new THREE.MeshStandardMaterial({color:0xdde4f0,emissive:0xaabbdd,emissiveIntensity:0.25,roughness:0.8,metalness:0.05});
+const bgMV=bgMoonGeo.attributes.position;
+for(let i=0;i<bgMV.count;i++){
+  const x=bgMV.getX(i),y=bgMV.getY(i),z=bgMV.getZ(i);
+  const n=Math.sin(x*3.1)*Math.cos(y*2.7)*Math.sin(z*4.3)*0.12+Math.sin(x*7)*Math.cos(z*5)*0.06+Math.sin(y*11+x*9)*0.03;
+  const len=Math.sqrt(x*x+y*y+z*z);bgMV.setXYZ(i,x+x/len*n,y+y/len*n,z+z/len*n);
+}
+bgMoonGeo.computeVertexNormals();
+const moon=new THREE.Mesh(bgMoonGeo,bgMoonMat);
+moon.position.set(-80,70,-100);S2.add(moon);
+// Moon glow layers
+const halo=new THREE.Mesh(new THREE.SphereGeometry(12,32,32),new THREE.MeshBasicMaterial({color:0x889bcc,transparent:true,opacity:0.1}));
+halo.position.copy(moon.position);S2.add(halo);
+const bgMoonGlow=new THREE.Mesh(new THREE.SphereGeometry(20,32,32),new THREE.MeshBasicMaterial({color:0x667799,transparent:true,opacity:0.035}));
+bgMoonGlow.position.copy(moon.position);S2.add(bgMoonGlow);
+const bgMoonPt=new THREE.PointLight(0x8899cc,0.5,250,1.5);bgMoonPt.position.copy(moon.position);S2.add(bgMoonPt);
+
+// Brighter ambient
+S2.add(new THREE.AmbientLight(0x1a2040,0.7));
+
+// STARS — dense star field
+const starCount=3000;
+const starGeo=new THREE.BufferGeometry();
+const starPos=new Float32Array(starCount*3),starSz=new Float32Array(starCount),starOp=new Float32Array(starCount);
+for(let i=0;i<starCount;i++){
+  const theta=Math.random()*Math.PI*2,phi=Math.random()*Math.PI*0.45;
+  const r=150+Math.random()*200;
+  starPos[i*3]=Math.cos(theta)*Math.sin(phi)*r;
+  starPos[i*3+1]=20+Math.cos(phi)*r;
+  starPos[i*3+2]=Math.sin(theta)*Math.sin(phi)*r-100;
+  starSz[i]=0.3+Math.random()*1.5;
+  starOp[i]=0.3+Math.random()*0.7;
+}
+starGeo.setAttribute('position',new THREE.BufferAttribute(starPos,3));
+starGeo.setAttribute('size',new THREE.BufferAttribute(starSz,1));
+const starMat=new THREE.PointsMaterial({color:0xffeedd,size:1,transparent:true,opacity:0.6,sizeAttenuation:true});
+const stars=new THREE.Points(starGeo,starMat);
+S2.add(stars);
+
+// ORION CONSTELLATION — background scene
+const bgOrion=[
+  {x:-12,y:72,z:-140,s:2.5,c:0xffaa66},
+  {x:8,y:55,z:-140,s:2.3,c:0xaaccff},
+  {x:8,y:70,z:-140,s:1.8,c:0xbbddff},
+  {x:-10,y:57,z:-140,s:1.6,c:0xbbccee},
+  {x:-3,y:63,z:-140,s:1.4,c:0xddeeff},
+  {x:0,y:63,z:-140,s:1.6,c:0xddeeff},
+  {x:3,y:63,z:-140,s:1.3,c:0xddeeff},
+  {x:-1,y:76,z:-140,s:1.1,c:0xddeeff},
+  {x:-1,y:60,z:-140,s:0.9,c:0xffbbbb},
+  {x:0.5,y:59,z:-140,s:0.7,c:0xffcccc}
+];
+const bgOrionGeo=new THREE.BufferGeometry();
+const bgOrionPos=new Float32Array(bgOrion.length*3),bgOrionSz=new Float32Array(bgOrion.length);
+bgOrion.forEach((s,i)=>{bgOrionPos[i*3]=s.x;bgOrionPos[i*3+1]=s.y;bgOrionPos[i*3+2]=s.z;bgOrionSz[i]=s.s;});
+bgOrionGeo.setAttribute('position',new THREE.BufferAttribute(bgOrionPos,3));
+bgOrionGeo.setAttribute('size',new THREE.BufferAttribute(bgOrionSz,1));
+S2.add(new THREE.Points(bgOrionGeo,new THREE.PointsMaterial({color:0xffffff,size:2,transparent:true,opacity:0.8,sizeAttenuation:true})));
+const bgNebula=new THREE.Mesh(new THREE.SphereGeometry(2.5,16,16),new THREE.MeshBasicMaterial({color:0xff6688,transparent:true,opacity:0.05}));
+bgNebula.position.set(-0.5,59.5,-138);S2.add(bgNebula);
+
+// SHOOTING STARS — celestial events (rare)
+const shootingStars=[];
+function createShootingStar(){
+  const geo=new THREE.BufferGeometry();
+  const trail=8;const pos=new Float32Array(trail*3),op=new Float32Array(trail);
+  const startX=-100+Math.random()*200,startY=50+Math.random()*60,startZ=-80-Math.random()*60;
+  const vx=15+Math.random()*25,vy=-8-Math.random()*12,vz=-5+Math.random()*10;
+  for(let i=0;i<trail;i++){pos[i*3]=startX;pos[i*3+1]=startY;pos[i*3+2]=startZ;op[i]=0;}
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const mat=new THREE.PointsMaterial({color:0xffeedd,size:1.5,transparent:true,opacity:0.8,sizeAttenuation:true});
+  const pts=new THREE.Points(geo,mat);
+  S2.add(pts);
+  return{pos,op,geo,pts,mat,x:startX,y:startY,z:startZ,vx,vy,vz,life:0,maxLife:1.5+Math.random()*2,active:true,trail};
+}
+for(let i=0;i<3;i++)shootingStars.push(createShootingStar());
+
+const dkMet=new THREE.MeshStandardMaterial({color:0x2a2a2a,metalness:0.8,roughness:0.4});
+const gldMet=new THREE.MeshStandardMaterial({color:0x8a6a20,metalness:0.7,roughness:0.3,emissive:0x3a2a00,emissiveIntensity:0.1});
+
+// PUMP JACKS
+const pumpJacks=[];
+function createPumpJack(x,z,scale){
+  const g=new THREE.Group();g.scale.set(scale,scale,scale);
+  g.add(new THREE.Mesh(new THREE.BoxGeometry(2,0.4,1.5),dkMet).translateY(0.2));
+  const tower=new THREE.Mesh(new THREE.BoxGeometry(0.3,5,0.3),dkMet);tower.position.set(0,2.7,0);g.add(tower);
+  const beam=new THREE.Group();beam.position.set(0,5.2,0);
+  beam.add(new THREE.Mesh(new THREE.BoxGeometry(6,0.25,0.3),dkMet));
+  const head=new THREE.Mesh(new THREE.BoxGeometry(0.8,1.2,0.3),gldMet);head.position.set(-3,-0.4,0);beam.add(head);
+  const cw=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.4,8),dkMet);cw.position.set(2.8,0,0);cw.rotation.z=Math.PI/2;beam.add(cw);
+  g.add(beam);
+  const rod=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,4,4),gldMet);rod.position.set(-3,3,0);g.add(rod);
+  g.position.set(x,0,z);S2.add(g);
+  pumpJacks.push({group:g,beam,rod,speed:0.7+Math.random()*0.5,phase:Math.random()*Math.PI*2});
+}
+createPumpJack(-30,10,1.3);createPumpJack(35,-5,1.1);createPumpJack(-55,-10,0.9);createPumpJack(60,15,1);
+
+// GAS FLARES
+const flareGroups=[];
+const fvs=`attribute float size;attribute float opacity;attribute vec3 customColor;varying float vO;varying vec3 vC;void main(){vO=opacity;vC=customColor;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_PointSize=size*(200.0/-mv.z);gl_Position=projectionMatrix*mv;}`;
+const ffs=`varying float vO;varying vec3 vC;void main(){float d=length(gl_PointCoord-vec2(0.5));if(d>0.5)discard;float a=smoothstep(0.5,0.05,d)*vO;gl_FragColor=vec4(vC,a);}`;
+function createFlare(x,z,h){
+  const g=new THREE.Group();
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.2,h,6),dkMet).translateY(h/2));
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,2.5,10),dkMet).translateY(1.25).translateZ(-3));
+  g.add(new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,2.5,10),dkMet).translateY(1.25).translateZ(-3).translateX(3.2));
+  g.position.set(x,0,z);S2.add(g);
+  const cnt=120;
+  const pos=new Float32Array(cnt*3),sz=new Float32Array(cnt),op=new Float32Array(cnt),col=new Float32Array(cnt*3);
+  const vel=new Float32Array(cnt*3),life=new Float32Array(cnt),maxL=new Float32Array(cnt);
+  const fCy=new THREE.Color(0xFFEE55),fCo=new THREE.Color(0xFF7700),fCr=new THREE.Color(0xDD2200);
+  function initP(i){
+    pos[i*3]=x+(Math.random()-0.5)*0.6;pos[i*3+1]=h+Math.random()*0.5;pos[i*3+2]=z+(Math.random()-0.5)*0.6;
+    vel[i*3]=(Math.random()-0.5)*1.5;vel[i*3+1]=2+Math.random()*4;vel[i*3+2]=(Math.random()-0.5)*1.5;
+    sz[i]=1.5+Math.random()*3;op[i]=0.6+Math.random()*0.4;
+    const t=Math.random();const c=t<0.3?fCy:t<0.7?fCo:fCr;
+    col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
+    life[i]=Math.random()*1.5;maxL[i]=1+Math.random()*1.5;
+  }
+  for(let i=0;i<cnt;i++)initP(i);
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));geo.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  geo.setAttribute('opacity',new THREE.BufferAttribute(op,1));geo.setAttribute('customColor',new THREE.BufferAttribute(col,3));
+  const mat=new THREE.ShaderMaterial({vertexShader:fvs,fragmentShader:ffs,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+  S2.add(new THREE.Points(geo,mat));
+  const lt=new THREE.PointLight(0xFF6600,1.5,30,2);lt.position.set(x,h+2,z);S2.add(lt);
+  flareGroups.push({pos,vel,sz,op,col,life,maxL,geo,cnt,initP,lt,baseH:h,x,z});
+}
+createFlare(-18,-3,8);createFlare(22,5,6);createFlare(-48,12,7);
+
+// Scroll-based visibility — translucent so content reads through
+let scrollY2=0,bgVisible=false;
+window.addEventListener('scroll',function(){
+  scrollY2=window.scrollY;const vh=window.innerHeight;
+  if(scrollY2>vh*0.4&&!bgVisible){ofc.style.opacity='0.45';bgVisible=true;}
+  if(scrollY2<vh*0.25&&bgVisible){ofc.style.opacity='0';bgVisible=false;}
+});
+window.addEventListener('resize',function(){
+  C2.aspect=window.innerWidth/window.innerHeight;C2.updateProjectionMatrix();R2.setSize(window.innerWidth,window.innerHeight);
+});
+
+let nextShootTime=20+Math.random()*40;
+function animate2(){
+  requestAnimationFrame(animate2);
+  if(!bgVisible)return;
+  const dt=Math.min(clk2.getDelta(),0.05),el=clk2.getElapsedTime();
+  // Star twinkle
+  for(let i=0;i<starCount;i++){
+    starSz[i]=0.3+Math.abs(Math.sin(el*0.5+i*0.7))*1.2;
+  }
+  starGeo.attributes.size.needsUpdate=true;
+  // Shooting stars
+  nextShootTime-=dt;
+  if(nextShootTime<=0){
+    const ss=shootingStars.find(s=>!s.active);
+    if(ss){ss.x=-100+Math.random()*200;ss.y=50+Math.random()*60;ss.z=-80-Math.random()*60;ss.vx=15+Math.random()*25;ss.vy=-8-Math.random()*12;ss.vz=-5+Math.random()*10;ss.life=0;ss.active=true;}
+    nextShootTime=25+Math.random()*45;
+  }
+  shootingStars.forEach(ss=>{
+    if(!ss.active)return;
+    ss.life+=dt;if(ss.life>ss.maxLife){ss.active=false;ss.mat.opacity=0;return;}
+    ss.x+=ss.vx*dt;ss.y+=ss.vy*dt;ss.z+=ss.vz*dt;
+    for(let i=ss.trail-1;i>0;i--){ss.pos[i*3]=ss.pos[(i-1)*3];ss.pos[i*3+1]=ss.pos[(i-1)*3+1];ss.pos[i*3+2]=ss.pos[(i-1)*3+2];}
+    ss.pos[0]=ss.x;ss.pos[1]=ss.y;ss.pos[2]=ss.z;
+    ss.mat.opacity=Math.max(0,0.8*(1-ss.life/ss.maxLife));
+    ss.geo.attributes.position.needsUpdate=true;
+  });
+  // Moon glow pulse + rotation
+  halo.material.opacity=0.08+Math.sin(el*0.3)*0.04;
+  bgMoonGlow.material.opacity=0.025+Math.sin(el*0.15)*0.015;
+  moon.rotation.y=el*0.01;
+  // Orion twinkle
+  for(let i=0;i<bgOrion.length;i++){bgOrionSz[i]=bgOrion[i].s*(0.8+Math.sin(el*0.5+i*2.3)*0.25);}
+  bgOrionGeo.attributes.size.needsUpdate=true;
+  bgNebula.material.opacity=0.035+Math.sin(el*0.3)*0.02;
+  // Pump jacks
+  pumpJacks.forEach(pj=>{
+    const angle=Math.sin(el*pj.speed+pj.phase)*0.35;
+    pj.beam.rotation.z=angle;pj.rod.position.y=3+Math.sin(el*pj.speed+pj.phase)*1.2;
+  });
+  // Flare particles
+  flareGroups.forEach(f=>{
+    for(let i=0;i<f.cnt;i++){
+      f.life[i]+=dt;if(f.life[i]>f.maxL[i]){f.initP(i);f.life[i]=0;continue;}
+      f.pos[i*3]+=f.vel[i*3]*dt;f.pos[i*3+1]+=f.vel[i*3+1]*dt;f.pos[i*3+2]+=f.vel[i*3+2]*dt;
+      f.vel[i*3]+=(Math.random()-0.5)*dt*3;f.vel[i*3+2]+=(Math.random()-0.5)*dt*3;
+      f.op[i]=Math.max(0,(1-f.life[i]/f.maxL[i])*0.8);f.sz[i]*=(1+dt*0.5);
+    }
+    f.geo.attributes.position.needsUpdate=true;f.geo.attributes.opacity.needsUpdate=true;f.geo.attributes.size.needsUpdate=true;
+    f.lt.intensity=1.5+Math.sin(el*10+f.x)*0.6+Math.sin(el*16)*0.3;
+  });
+  C2.position.x=Math.sin(el*0.02)*12;C2.lookAt(0,8,0);
+  R2.render(S2,C2);
+}
+animate2();
+})();
+
+// ============================================================
+//  OIL RAIN — 2D Canvas overlay — beautiful oily droplets
+// ============================================================
+(function(){
+'use strict';
+const cv=document.getElementById('oil-rain-canvas');
+if(!cv)return;
+const ctx=cv.getContext('2d');
+let W=window.innerWidth,H=window.innerHeight;
+cv.width=W;cv.height=H;
+window.addEventListener('resize',()=>{W=window.innerWidth;H=window.innerHeight;cv.width=W;cv.height=H;});
+
+const drops=[];
+const splashes=[];
+const splatters=[];
+const MAX_DROPS=60;
+const oilColors=['rgba(26,15,0,','rgba(58,34,0,','rgba(107,68,0,','rgba(200,149,46,'];
+
+function spawnDrop(){
+  if(drops.length>=MAX_DROPS)return;
+  drops.push({
+    x:Math.random()*W,
+    y:-10-Math.random()*40,
+    vy:1.5+Math.random()*3,
+    vx:(Math.random()-0.5)*0.5,
+    r:1.5+Math.random()*3,
+    opacity:0.15+Math.random()*0.25,
+    color:oilColors[Math.floor(Math.random()*oilColors.length)],
+    trail:[],
+    maxTrail:4+Math.floor(Math.random()*6)
+  });
+}
+
+function spawnSplash(x,y,color){
+  const n=3+Math.floor(Math.random()*4);
+  for(let i=0;i<n;i++){
+    splashes.push({
+      x,y,
+      vx:(Math.random()-0.5)*3,
+      vy:-1-Math.random()*2,
+      r:0.8+Math.random()*1.5,
+      opacity:0.3+Math.random()*0.2,
+      color,
+      life:0,
+      maxLife:0.3+Math.random()*0.4
+    });
+  }
+}
+
+// OIL SPLATTERS — random screen coverage, occasional
+let nextSplatter=8+Math.random()*15;
+function spawnSplatter(){
+  const x=50+Math.random()*(W-100);
+  const y=80+Math.random()*(H*0.6);
+  const baseR=20+Math.random()*40;
+  const color=oilColors[Math.floor(Math.random()*oilColors.length)];
+  const blobs=[];
+  // Main splat
+  blobs.push({x,y,r:baseR,ox:0,oy:0});
+  // Satellite blobs
+  const numBlobs=5+Math.floor(Math.random()*8);
+  for(let i=0;i<numBlobs;i++){
+    const angle=Math.random()*Math.PI*2;
+    const dist=baseR*0.5+Math.random()*baseR*1.2;
+    blobs.push({x:x+Math.cos(angle)*dist,y:y+Math.sin(angle)*dist,r:3+Math.random()*12,ox:0,oy:0});
+  }
+  // Thin streaks/drips running down
+  const numDrips=2+Math.floor(Math.random()*3);
+  const drips=[];
+  for(let i=0;i<numDrips;i++){
+    drips.push({x:x+(Math.random()-0.5)*baseR,y:y+baseR*0.3,len:0,maxLen:30+Math.random()*80,speed:0.3+Math.random()*0.5});
+  }
+  splatters.push({blobs,drips,color,opacity:0,fadeIn:true,life:0,maxLife:4+Math.random()*6,maxOpacity:0.12+Math.random()*0.1});
+}
+
+let scrollY3=0;
+window.addEventListener('scroll',()=>{scrollY3=window.scrollY;});
+
+function drawFrame(){
+  requestAnimationFrame(drawFrame);
+  ctx.clearRect(0,0,W,H);
+  // Only show rain in hero area
+  if(scrollY3>H*1.2)return;
+  const heroOpacity=Math.max(0,1-scrollY3/(H*0.8));
+  if(heroOpacity<0.05)return;
+
+  // Spawn rate
+  if(Math.random()<0.15)spawnDrop();
+
+  // Update + draw drops
+  for(let i=drops.length-1;i>=0;i--){
+    const d=drops[i];
+    d.trail.push({x:d.x,y:d.y});
+    if(d.trail.length>d.maxTrail)d.trail.shift();
+    d.x+=d.vx;
+    d.y+=d.vy;
+    d.vy+=0.08;
+
+    // Draw trail
+    if(d.trail.length>1){
+      ctx.beginPath();
+      ctx.moveTo(d.trail[0].x,d.trail[0].y);
+      for(let j=1;j<d.trail.length;j++){
+        ctx.lineTo(d.trail[j].x,d.trail[j].y);
+      }
+      ctx.lineTo(d.x,d.y);
+      ctx.strokeStyle=d.color+(d.opacity*heroOpacity*0.5)+')';
+      ctx.lineWidth=d.r*0.6;
+      ctx.lineCap='round';
+      ctx.stroke();
+    }
+
+    // Draw drop head — iridescent oil effect
+    const grad=ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r*2);
+    grad.addColorStop(0,d.color+(d.opacity*heroOpacity)+')');
+    grad.addColorStop(0.5,d.color+(d.opacity*heroOpacity*0.6)+')');
+    grad.addColorStop(1,d.color+'0)');
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r*2,0,Math.PI*2);
+    ctx.fillStyle=grad;
+    ctx.fill();
+
+    // Tiny highlight for oil sheen
+    ctx.beginPath();
+    ctx.arc(d.x-d.r*0.3,d.y-d.r*0.3,d.r*0.4,0,Math.PI*2);
+    ctx.fillStyle='rgba(200,180,120,'+(d.opacity*heroOpacity*0.4)+')';
+    ctx.fill();
+
+    // Splash when hitting bottom or going off screen
+    if(d.y>H+20){
+      drops.splice(i,1);
+    }else if(d.y>H*0.85&&Math.random()<0.02){
+      spawnSplash(d.x,d.y,d.color);
+      drops.splice(i,1);
+    }
+  }
+
+  // Update + draw splashes
+  for(let i=splashes.length-1;i>=0;i--){
+    const s=splashes[i];
+    s.life+=0.016;
+    if(s.life>s.maxLife){splashes.splice(i,1);continue;}
+    s.x+=s.vx;s.y+=s.vy;s.vy+=0.15;
+    const fade=1-s.life/s.maxLife;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r*fade,0,Math.PI*2);
+    ctx.fillStyle=s.color+(s.opacity*fade*heroOpacity)+')';
+    ctx.fill();
+  }
+
+  // OIL SPLATTERS — random screen coating
+  nextSplatter-=0.016;
+  if(nextSplatter<=0&&splatters.length<3){
+    spawnSplatter();
+    nextSplatter=10+Math.random()*20;
+  }
+  for(let i=splatters.length-1;i>=0;i--){
+    const sp=splatters[i];
+    sp.life+=0.016;
+    if(sp.life>sp.maxLife){splatters.splice(i,1);continue;}
+    // Fade in then fade out
+    let alpha;
+    if(sp.life<0.8){alpha=sp.maxOpacity*(sp.life/0.8);}
+    else if(sp.life>sp.maxLife-1.5){alpha=sp.maxOpacity*((sp.maxLife-sp.life)/1.5);}
+    else{alpha=sp.maxOpacity;}
+    alpha*=heroOpacity;
+    // Draw blobs
+    sp.blobs.forEach(b=>{
+      const grad=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+      grad.addColorStop(0,sp.color+(alpha*1.2)+')');
+      grad.addColorStop(0.4,sp.color+(alpha)+')');
+      grad.addColorStop(0.7,sp.color+(alpha*0.5)+')');
+      grad.addColorStop(1,sp.color+'0)');
+      ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+      // Oily sheen highlight
+      ctx.beginPath();ctx.arc(b.x-b.r*0.2,b.y-b.r*0.2,b.r*0.25,0,Math.PI*2);
+      ctx.fillStyle='rgba(220,200,140,'+(alpha*0.5)+')';ctx.fill();
+    });
+    // Drip streaks
+    sp.drips.forEach(d=>{
+      if(d.len<d.maxLen)d.len+=d.speed;
+      ctx.beginPath();ctx.moveTo(d.x,d.y);
+      ctx.lineTo(d.x+(Math.sin(d.x)*2),d.y+d.len);
+      ctx.strokeStyle=sp.color+(alpha*0.7)+')';
+      ctx.lineWidth=1.5+Math.random()*0.5;ctx.lineCap='round';ctx.stroke();
+      // Drip bulb at bottom
+      ctx.beginPath();ctx.arc(d.x+(Math.sin(d.x)*2),d.y+d.len,2,0,Math.PI*2);
+      ctx.fillStyle=sp.color+(alpha)+')';ctx.fill();
+    });
+  }
+}
+drawFrame();
+})();
+</script>
+</body>
+</html>
