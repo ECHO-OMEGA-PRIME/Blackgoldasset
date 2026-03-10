@@ -59,9 +59,9 @@
 
     content.innerHTML = html;
 
-    // Load Google Maps API
+    // Load Google Maps API (async loading per best-practice)
     var gmScript = document.createElement('script');
-    gmScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCuTHwqo6HPjR0oSlCnWBkRslXTZg41VWY&libraries=visualization&callback=wiInitMap';
+    gmScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCuTHwqo6HPjR0oSlCnWBkRslXTZg41VWY&libraries=visualization,marker&loading=async&callback=wiInitMap';
     gmScript.async = true;
     gmScript.defer = true;
     document.head.appendChild(gmScript);
