@@ -177,9 +177,9 @@
         items.forEach(function(w) {
           html += '<tr onclick="window.location.href=\'well-detail.html?id=' + encodeURIComponent(w.id) + '\'">';
           html += '<td style="color:var(--gold)">' + c.escapeHtml(w.well_name) + '</td>';
-          html += '<td>' + c.escapeHtml(w.operator || '—') + '</td>';
+          html += '<td>' + c.escapeHtml(w.operator_name || '—') + '</td>';
           html += '<td>' + c.escapeHtml(w.formation || '—') + '</td>';
-          html += '<td>' + c.formatNumber(w.tds) + '</td>';
+          html += '<td>' + c.formatNumber(w.latest_tds) + '</td>';
           html += '<td>' + (w.distance_miles ? c.formatNumber(w.distance_miles, 1) + ' mi' : '—') + '</td>';
           html += '</tr>';
         });

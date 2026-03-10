@@ -133,9 +133,9 @@
           marker.addListener('click', function() {
             var content = '<div class="map-info-window">' +
               '<h4>' + c.escapeHtml(w.well_name) + '</h4>' +
-              '<p><strong>Operator:</strong> ' + c.escapeHtml(w.operator) + '</p>' +
+              '<p><strong>Operator:</strong> ' + c.escapeHtml(w.operator_name) + '</p>' +
               (w.formation ? '<p><strong>Formation:</strong> ' + c.escapeHtml(w.formation) + '</p>' : '') +
-              (w.tds ? '<p><strong>TDS:</strong> ' + c.formatNumber(w.tds) + ' mg/L</p>' : '') +
+              (w.latest_tds ? '<p><strong>TDS:</strong> ' + c.formatNumber(w.latest_tds) + ' mg/L</p>' : '') +
               '<p><a class="map-link" href="well-detail.html?id=' + encodeURIComponent(w.id) + '">View Details →</a></p>' +
               '</div>';
             infoWindow.setContent(content);
@@ -156,7 +156,7 @@
         var data = await api('/api/v1/map/heatmap/' + selectedIon);
         var points = (data.points || data || []).map(function(p) {
           return {
-            location: new google.maps.LatLng(p.latitude, p.longitude),
+            location: new google.maps.LatLng(p.lat, p.lon),
             weight: p.value || 1
           };
         });

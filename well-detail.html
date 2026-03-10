@@ -62,7 +62,7 @@
         var h1 = document.querySelector('.wi-topbar-left h1');
         var p = document.querySelector('.wi-topbar-left p');
         if (h1) h1.textContent = well.well_name;
-        if (p) p.textContent = (well.operator || '') + (well.formation ? ' • ' + well.formation : '');
+        if (p) p.textContent = (well.operator_name || '') + (well.target_formation ? ' • ' + well.target_formation : '');
 
         renderWellDetail();
       } catch(e) {
@@ -80,10 +80,10 @@
 
       // Info Cards
       html += '<div class="stat-grid" style="margin-bottom:24px">';
-      html += infoCard('Operator', w.operator || '—');
-      html += infoCard('Formation', w.formation || '—');
+      html += infoCard('Operator', w.operator_name || '—');
+      html += infoCard('Formation', w.target_formation || '—');
       html += infoCard('County / State', (w.county || '—') + ', ' + (w.state || 'TX'));
-      html += infoCard('Depth', w.depth_ft ? c.formatNumber(w.depth_ft, 0) + ' ft' : '—');
+      html += infoCard('Depth', w.total_depth_ft ? c.formatNumber(w.total_depth_ft, 0) + ' ft' : '—');
       html += '</div>';
 
       // Well Details Card
@@ -92,7 +92,7 @@
       html += '<div class="ion-grid">';
       html += ionItem('API Number', w.api_number || '—');
       html += ionItem('Field Name', w.field_name || '—');
-      html += ionItem('Status', w.status || 'active');
+      html += ionItem('Status', w.well_status || 'active');
       html += ionItem('Latitude', w.latitude ? w.latitude.toFixed(6) : '—');
       html += ionItem('Longitude', w.longitude ? w.longitude.toFixed(6) : '—');
       html += ionItem('Created', c.formatDate(w.created_at));

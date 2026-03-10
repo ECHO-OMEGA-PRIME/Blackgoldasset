@@ -78,10 +78,10 @@
           html += '<tr onclick="window.location.href=\'well-detail.html?id=' + encodeURIComponent(w.id) + '\'">';
           html += '<td style="color:var(--gold);font-weight:600">' + c.escapeHtml(w.well_name) + '</td>';
           html += '<td>' + c.escapeHtml(w.api_number || '—') + '</td>';
-          html += '<td>' + c.escapeHtml(w.operator) + '</td>';
-          html += '<td>' + c.escapeHtml(w.formation || '—') + '</td>';
+          html += '<td>' + c.escapeHtml(w.operator_name) + '</td>';
+          html += '<td>' + c.escapeHtml(w.target_formation || '—') + '</td>';;
           html += '<td>' + c.escapeHtml(w.county || '—') + '</td>';
-          html += '<td>' + c.statusBadge(w.status || 'active') + '</td>';
+          html += '<td>' + c.statusBadge(w.well_status || 'active') + '</td>';
           html += '</tr>';
         });
         html += '</tbody></table></div>';

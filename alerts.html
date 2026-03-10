@@ -91,9 +91,9 @@
           html += '<td>' + c.severityBadge(a.severity) + '</td>';
           html += '<td><a href="well-detail.html?id=' + encodeURIComponent(a.well_id) + '" style="color:var(--gold)">' +
             c.escapeHtml(a.well_name || (a.well_id || '').slice(0, 8)) + '</a></td>';
-          html += '<td style="font-family:monospace;font-size:0.8rem">' + c.escapeHtml(a.rule_code) + '</td>';
+          html += '<td style="font-family:monospace;font-size:0.8rem">' + c.escapeHtml(a.ion_name) + '</td>';
           html += '<td>' + c.escapeHtml(a.alert_type) + '</td>';
-          html += '<td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + c.escapeHtml(a.message) + '</td>';
+          html += '<td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + c.escapeHtml(a.description) + '</td>';
           html += '<td style="color:var(--white-dim);white-space:nowrap">' + c.formatDate(a.created_at) + '</td>';
           html += '<td>';
           if (!a.acknowledged) {
