@@ -73,6 +73,14 @@ async function apiUpload(path, file) {
 
 // Expose globally
 window.bgat = window.bgat || {};
-window.bgat.api = { apiFetch: apiFetch, apiUpload: apiUpload, ApiError: ApiError, API_BASE: API_BASE };
+window.bgat.api = {
+  apiFetch: apiFetch,
+  apiUpload: apiUpload,
+  apiPost: function(path, body) {
+    return apiFetch(path, { method: 'POST', body: JSON.stringify(body) });
+  },
+  ApiError: ApiError,
+  API_BASE: API_BASE
+};
 
 })(window);
