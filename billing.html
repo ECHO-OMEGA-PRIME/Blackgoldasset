@@ -34,7 +34,7 @@
       '<div class="glass-card" style="padding:24px">' + c.skeletonRows(5, 40) + '</div>';
 
     var wells = [];
-    var operators = [];
+    var customers = [];
 
     wiAuth.subscribe(function(s) {
       if (s.user && s.authorized && !s.loading) loadBilling();
@@ -42,12 +42,14 @@
 
     async function loadBilling() {
       try {
-        var [invoicesRes, statsRes, wellsRes] = await Promise.all([
+        var [invoicesRes, statsRes, wellsRes, custRes] = await Promise.all([
           api('/api/v1/invoices?per_page=50').catch(function() { return { items: [], total: 0 }; }),
           api('/api/v1/invoices/stats/summary').catch(function() { return {}; }),
-          api('/api/v1/wells?per_page=200').catch(function() { return { items: [] }; })
+          api('/api/v1/wells?per_page=200').catch(function() { return { items: [] }; }),
+          api('/api/v1/customers?per_page=200&status=active').catch(function() { return { items: [] }; })
         ]);
         wells = wellsRes.items || [];
+        customers = custRes.items || [];
         renderBilling(invoicesRes.items || [], statsRes);
       } catch(e) {
         content.innerHTML = '<div class="empty-state"><p>Error loading billing: ' + c.escapeHtml(e.message) + '</p></div>';
@@ -156,9 +158,19 @@
       formHtml += '<button id="closeModal" style="background:none;border:none;color:var(--white-dim);font-size:1.5rem;cursor:pointer">&times;</button>';
       formHtml += '</div>';
 
+      // Build customer dropdown
+      var custOptions = '<option value="">— Select Customer —</option>';
+      customers.forEach(function(cu) {
+        custOptions += '<option value="' + cu.id + '" data-name="' + c.escapeHtml(cu.company_name) + '" data-email="' + c.escapeHtml(cu.email || '') + '">' + c.escapeHtml(cu.company_name) + (cu.contact_name ? ' (' + c.escapeHtml(cu.contact_name) + ')' : '') + '</option>';
+      });
+      custOptions += '<option value="__new__">+ Add New Customer...</option>';
+
       formHtml += '<div style="display:grid;gap:16px">';
-      formHtml += formField('Customer Name', '<input type="text" id="invCustomer" placeholder="e.g. Pioneer Natural Resources" class="wi-input">');
+      formHtml += formField('Customer', '<select id="invCustomerSelect" class="wi-input">' + custOptions + '</select>');
+      formHtml += '<div id="newCustFields" style="display:none">';
+      formHtml += formField('New Customer Name', '<input type="text" id="invCustomer" placeholder="e.g. Pioneer Natural Resources" class="wi-input">');
       formHtml += formField('Customer Email', '<input type="email" id="invEmail" placeholder="billing@example.com" class="wi-input">');
+      formHtml += '</div>';
       formHtml += formField('Well', '<select id="invWell" class="wi-input">' + wellOptions + '</select>');
       formHtml += formField('Service Type', '<select id="invService" class="wi-input">' + serviceOpts + '</select>');
       formHtml += formField('Unit Price ($)', '<input type="number" id="invPrice" value="150" min="0" step="0.01" class="wi-input">');
@@ -193,6 +205,25 @@
         document.getElementById('invTotal').textContent = '$' + formatMoney(subtotal + tax);
       }
 
+      // Customer dropdown logic
+      document.getElementById('invCustomerSelect').addEventListener('change', function() {
+        var val = this.value;
+        var newFields = document.getElementById('newCustFields');
+        if (val === '__new__') {
+          newFields.style.display = 'grid';
+          newFields.style.gap = '16px';
+        } else {
+          newFields.style.display = 'none';
+          // Auto-fill email if available
+          var opt = this.options[this.selectedIndex];
+          var email = opt.getAttribute('data-email');
+          if (email) {
+            var emailField = document.getElementById('invEmail');
+            if (emailField) emailField.value = email;
+          }
+        }
+      });
+
       // Service type changes price
       document.getElementById('invService').addEventListener('change', function() {
         var opt = this.options[this.selectedIndex];
@@ -216,9 +247,26 @@
 
       // Create
       document.getElementById('btnCreateInvoice').addEventListener('click', async function() {
-        var customerName = document.getElementById('invCustomer').value.trim();
-        if (!customerName) {
-          c.showToast('Customer name is required', 'error');
+        var custSelect = document.getElementById('invCustomerSelect');
+        var custVal = custSelect.value;
+        var customerName = '';
+        var customerId = '';
+        var customerEmail = '';
+
+        if (custVal === '__new__') {
+          customerName = document.getElementById('invCustomer').value.trim();
+          customerEmail = document.getElementById('invEmail').value.trim();
+          if (!customerName) {
+            c.showToast('Customer name is required', 'error');
+            return;
+          }
+        } else if (custVal) {
+          var opt = custSelect.options[custSelect.selectedIndex];
+          customerName = opt.getAttribute('data-name');
+          customerEmail = opt.getAttribute('data-email') || '';
+          customerId = custVal;
+        } else {
+          c.showToast('Please select a customer', 'error');
           return;
         }
 
@@ -235,7 +283,8 @@
 
           var payload = {
             customer_name: customerName,
-            customer_email: document.getElementById('invEmail').value.trim() || undefined,
+            customer_id: customerId || undefined,
+            customer_email: customerEmail || undefined,
             service_type: serviceType,
             due_date: document.getElementById('invDue').value || undefined,
             notes: document.getElementById('invNotes').value.trim() || undefined,
