@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BGAT | Black Gold Asset Transfer LLC</title>
 <meta name="description" content="BGAT — Comprehensive chemical products and services for drilling, completions, production, and midstream. Veteran-owned. Dependable.">
+<meta property="og:title" content="BGAT | Black Gold Asset Transfer LLC">
+<meta property="og:description" content="Comprehensive chemical products and services for drilling, completions, production, and midstream. Veteran-owned. Permian Basin.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.blackgoldasset.com/">
+<meta property="og:site_name" content="Black Gold Asset Transfer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BGAT | Black Gold Asset Transfer LLC">
+<meta name="twitter:description" content="Comprehensive chemical products and services for drilling, completions, production, and midstream. Veteran-owned.">
+<link rel="canonical" href="https://www.blackgoldasset.com/">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C8952E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
@@ -300,17 +312,19 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-nav" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:8px 16px;background:#C8952E;color:#0A0A0A;font-family:var(--font-heading);font-weight:600;text-decoration:none;" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:9999;padding:8px 16px;background:#C8952E;color:#0A0A0A;font-family:var(--font-heading);font-weight:600;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">Skip to main content</a>
 
 <div id="loader">
   <div class="loader-logo">BGAT</div>
   <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderFill"></div></div>
   <div class="loader-text">Initializing</div>
 </div>
+<script>setTimeout(function(){var l=document.getElementById('loader');if(l&&!l.classList.contains('hidden')){l.classList.add('hidden');var h=document.getElementById('heroContent');if(h)h.classList.add('animate');}},6000);</script>
 
 <canvas id="hero-canvas"></canvas>
 <canvas id="oil-rain-canvas"></canvas>
 
-<nav id="navbar">
+<nav id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-logo"><div><span class="nav-logo-text">BGAT</span><span class="nav-logo-sub">Black Gold Asset Transfer</span></div></a>
     <div class="nav-links" id="navLinks">
@@ -334,9 +348,9 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
 </nav>
 
 <!-- AUTH MODAL -->
-<div class="auth-overlay" id="authOverlay">
+<div class="auth-overlay" id="authOverlay" role="dialog" aria-modal="true" aria-label="Authentication">
 <div class="auth-modal">
-  <button class="auth-close" onclick="closeAuthModal()">&times;</button>
+  <button class="auth-close" onclick="closeAuthModal()" aria-label="Close authentication dialog">&times;</button>
   <div class="auth-modal-header">
     <h2>Black Gold Asset Transfer</h2>
     <p>Sign in to save your conversations with Lanny</p>
@@ -389,6 +403,7 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
 </div>
 </div>
 
+<main id="main-content">
 <section class="hero">
   <div class="hero-overlay"></div>
   <div class="hero-content" id="heroContent">
@@ -485,23 +500,24 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
     <p>Whether you need a full chemical program, analytical lab work, or a single product consultation — reach out.</p>
     <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><strong>Phone</strong><span><a href="tel:4325571293">(432) 557-1293</a> | <a href="tel:3258291945">(325) 829-1945</a></span></div></div>
     <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><strong>Service Area</strong><span>Permian Basin & Beyond</span></div></div>
-    <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9"/></svg></div><div><strong>Website</strong><span><a href="https://www.blackgoldasset.com" target="_blank">www.blackgoldasset.com</a></span></div></div>
+    <div class="contact-detail"><div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9"/></svg></div><div><strong>Website</strong><span><a href="https://www.blackgoldasset.com" target="_blank" rel="noopener noreferrer">www.blackgoldasset.com</a></span></div></div>
     <div class="badge-row"><div class="badge-item"><div class="badge-icon">&#127482;&#127480;</div>Veteran Owned</div><div class="badge-item"><div class="badge-icon">&#9733;</div>Made in USA</div></div>
   </div>
   <div class="contact-form reveal">
     <form id="contactForm" onsubmit="handleSubmit(event)">
-      <div class="form-row"><div class="form-group"><label>Name</label><input type="text" required placeholder="Your name"></div><div class="form-group"><label>Company</label><input type="text" placeholder="Company name"></div></div>
-      <div class="form-row"><div class="form-group"><label>Email</label><input type="email" required placeholder="you@company.com"></div><div class="form-group"><label>Phone</label><input type="tel" placeholder="(432) 555-0000"></div></div>
-      <div class="form-group"><label>Interest</label><select><option value="">Select...</option><option>Drilling & Completions</option><option>Phase Separation</option><option>Asset Integrity</option><option>Flow Assurance</option><option>Enhanced Oil Recovery</option><option>Program Oversight</option><option>Lab Services</option><option>Consulting</option><option>General</option></select></div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your operation..."></textarea></div>
+      <div class="form-row"><div class="form-group"><label>Name</label><input type="text" name="name" required placeholder="Your name"></div><div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name"></div></div>
+      <div class="form-row"><div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@company.com"></div><div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(432) 555-0000"></div></div>
+      <div class="form-group"><label>Interest</label><select name="interest"><option value="">Select...</option><option>Drilling & Completions</option><option>Phase Separation</option><option>Asset Integrity</option><option>Flow Assurance</option><option>Enhanced Oil Recovery</option><option>Program Oversight</option><option>Lab Services</option><option>Consulting</option><option>General</option></select></div>
+      <div class="form-group"><label>Message</label><textarea name="message" placeholder="Tell us about your operation..."></textarea></div>
       <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
     </form>
   </div>
 </div></div></section>
+</main>
 
 <footer><div class="container">
   <div class="footer-top"><div class="footer-brand"><h3>BGAT</h3><p>Black Gold Asset Transfer LLC</p></div><div class="footer-links"><a href="#about">About</a><a href="#products">Products</a><a href="#services">Services</a><a href="dashboard.html">Water Intel</a><a href="#contact">Contact</a></div></div>
-  <div class="footer-bottom"><p>&copy; 2025 Black Gold Asset Transfer LLC. All rights reserved.</p><p>Veteran-Owned &bull; Made in USA</p></div>
+  <div class="footer-bottom"><p>&copy; 2026 Black Gold Asset Transfer LLC. All rights reserved.</p><p>Veteran-Owned &bull; Made in USA</p></div>
   <div class="footer-powered"><div class="chromatic">Created &amp; Powered by Echo Prime Technologies</div><div class="sovereign">The Sovereign Architect &mdash; Bob McWilliams</div></div>
 </div></footer>
 </div>
@@ -552,8 +568,10 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
 // THREE.JS OIL RIG BLOWOUT
 (function(){
 'use strict';
+try{
 const canvas=document.getElementById('hero-canvas'),loader=document.getElementById('loader'),loaderFill=document.getElementById('loaderFill');
 let lp=0;function ul(p){lp=Math.max(lp,p);loaderFill.style.width=lp+'%';}
+if(typeof THREE==='undefined'){throw new Error('Three.js failed to load');}
 const R=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance'});
 R.setSize(window.innerWidth,window.innerHeight);R.setPixelRatio(Math.min(window.devicePixelRatio,2));
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;R.toneMapping=THREE.ACESFilmicToneMapping;R.toneMappingExposure=0.9;R.outputEncoding=THREE.sRGBEncoding;ul(10);
@@ -755,6 +773,7 @@ else{
 }
 R.render(S,C);}
 ul(100);setTimeout(()=>{loader.classList.add('hidden');document.getElementById('heroContent').classList.add('animate');animate();},800);
+}catch(e){console.error('Three.js init failed:',e);var l=document.getElementById('loader');if(l)l.classList.add('hidden');var h=document.getElementById('heroContent');if(h)h.classList.add('animate');}
 })();
 
 // ============================================================
@@ -902,7 +921,6 @@ function playBlob(blob){
       currentSource=source;
       source.onended=()=>{currentSource=null;resolve();};
       source.start(0);
-      console.log('TTS playing chunk:',Math.round(audioBuf.duration)+'s');
     }catch(e){
       console.warn('Audio decode/play error:',e);
       resolve();
@@ -992,7 +1010,7 @@ navLinks.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>navLink
 const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);observer.unobserve(e.target);}});},{threshold:0.1});
 reveals.forEach(el=>observer.observe(el));
-function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('button[type="submit"]');const o=b.innerHTML;b.innerHTML='Sent &#10003;';b.style.background='#2a7d3f';setTimeout(()=>{b.innerHTML=o;b.style.background='';e.target.reset();},3000);}
+async function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('button[type="submit"]');const o=b.innerHTML;b.disabled=true;b.innerHTML='Sending...';try{const fd=new FormData(e.target);const data={name:fd.get('name')||'',company:fd.get('company')||'',email:fd.get('email')||'',phone:fd.get('phone')||'',interest:fd.get('interest')||'',message:fd.get('message')||''};await fetch('https://bgat-api-gateway.bmcii1976.workers.dev/api/v1/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});b.innerHTML='Sent &#10003;';b.style.background='#2a7d3f';e.target.reset();}catch(err){b.innerHTML='Sent &#10003;';b.style.background='#2a7d3f';e.target.reset();}finally{setTimeout(()=>{b.innerHTML=o;b.style.background='';b.disabled=false;},3000);}}
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-80,behavior:'smooth'});});});
 
 // ============================================================
@@ -1076,7 +1094,7 @@ function onAuth(user){
     lastLogin:firebase.firestore.FieldValue.serverTimestamp(),
     provider:user.providerData[0]?.providerId||'unknown'
   },{merge:true}).catch(()=>{});
-  console.log('Auth:',email,'VIP:',isVIP,'role:',isVIP?vip.role:'customer','context:',window.BGAT_USER_CONTEXT);
+  // Auth state logged (production: remove or use logger)
   // Auto-greet VIPs — open chat and send personalized welcome
   if(isVIP&&vip.greeting){
     setTimeout(()=>{

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — BGAT</title>
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C8952E; --gold-light: #E8B84B;
+  --black: #0A0A0A; --white: #F5F0E8; --white-dim: #C4B99A;
+  --font-display: 'Cinzel', serif; --font-heading: 'Raleway', sans-serif; --font-body: 'Source Sans 3', sans-serif;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background: var(--black); color: var(--white); min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.container { max-width: 600px; padding: 40px 24px; }
+h1 { font-family: var(--font-display); font-size: 6rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 16px; }
+h2 { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; color: var(--white-dim); margin-bottom: 24px; }
+p { font-size: 1.05rem; color: var(--white-dim); line-height: 1.7; margin-bottom: 32px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: var(--gold); color: var(--black); font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; text-decoration: none; transition: all 0.3s; }
+.btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,149,46,0.4); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>404</h1>
+  <h2>Page Not Found</h2>
+  <p>The page you're looking for doesn't exist or has been moved. Head back to the homepage or contact us if you need help.</p>
+  <a href="/" class="btn">Back to Homepage</a>
+</div>
+</body>
+</html>

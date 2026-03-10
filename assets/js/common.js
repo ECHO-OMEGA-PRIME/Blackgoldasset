@@ -38,7 +38,7 @@ function buildSidebar(activePage) {
   sidebar.className = 'wi-sidebar';
 
   var brand = '<div class="wi-sidebar-brand"><a href="index.html">BGAT<span>Water Intelligence</span></a></div>';
-  var nav = '<nav class="wi-nav">';
+  var nav = '<nav class="wi-nav" aria-label="Water Intel navigation">';
   navItems.forEach(function(item) {
     if (item.divider) {
       nav += '<div class="wi-nav-divider"></div>';
@@ -127,6 +127,26 @@ function initPage(opts) {
 
   document.body.appendChild(layout);
   document.body.appendChild(authOverlay);
+
+  // Mobile sidebar toggle
+  var mobileToggle = document.createElement('button');
+  mobileToggle.className = 'wi-mobile-toggle';
+  mobileToggle.innerHTML = '&#9776;';
+  mobileToggle.setAttribute('aria-label', 'Toggle navigation');
+  document.body.appendChild(mobileToggle);
+
+  var mobileOverlay = document.createElement('div');
+  mobileOverlay.className = 'wi-sidebar-overlay';
+  document.body.appendChild(mobileOverlay);
+
+  mobileToggle.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+    mobileOverlay.classList.toggle('open');
+  });
+  mobileOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+  });
 
   // Init auth
   window.wiAuth.init().then(function() {
