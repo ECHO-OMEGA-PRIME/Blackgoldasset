@@ -30,8 +30,9 @@
 }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); background: var(--black); color: var(--white); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-#loader { position: fixed; inset: 0; z-index: 10000; background: #050505; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
-#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#loader { position: fixed; inset: 0; z-index: 10000; background: #050505; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; animation: loaderAutoHide 0.8s ease 5s forwards; }
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
+@keyframes loaderAutoHide { to { opacity: 0; visibility: hidden; pointer-events: none; } }
 .loader-logo { font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: var(--gold); letter-spacing: 8px; margin-bottom: 32px; animation: loaderPulse 1.5s ease-in-out infinite; }
 @keyframes loaderPulse { 0%, 100% { opacity: 0.4; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
 .loader-bar-track { width: 200px; height: 2px; background: rgba(200,149,46,0.15); position: relative; overflow: hidden; }
@@ -319,7 +320,7 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
   <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderFill"></div></div>
   <div class="loader-text">Initializing</div>
 </div>
-<script>setTimeout(function(){var l=document.getElementById('loader');if(l&&!l.classList.contains('hidden')){l.classList.add('hidden');var h=document.getElementById('heroContent');if(h)h.classList.add('animate');}},6000);</script>
+<script>setTimeout(function(){var l=document.getElementById('loader');if(l){l.style.display='none';l.classList.add('hidden');}var h=document.getElementById('heroContent');if(h)h.classList.add('animate');},4000);</script>
 
 <canvas id="hero-canvas"></canvas>
 <canvas id="oil-rain-canvas"></canvas>
