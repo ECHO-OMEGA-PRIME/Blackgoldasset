@@ -17,8 +17,14 @@ class ApiError extends Error {
 
 async function apiFetch(path, options) {
   options = options || {};
+  const method = (options.method || 'GET').toUpperCase();
   const token = localStorage.getItem('bgat_token');
-  const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {});
+  const headers = Object.assign({}, options.headers || {});
+
+  // Only set Content-Type for requests with a body
+  if (method !== 'GET' && method !== 'HEAD') {
+    if (!headers['Content-Type']) headers['Content-Type'] = 'application/json';
+  }
 
   if (token) {
     headers['Authorization'] = 'Bearer ' + token;

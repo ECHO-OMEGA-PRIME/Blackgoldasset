@@ -71,7 +71,21 @@ async function init() {
       firebase.initializeApp(FB_CONFIG);
     }
     return new Promise(function(resolve) {
+      var resolved = false;
+      // Timeout: if Firebase doesn't resolve in 8 seconds, mark as not_authenticated
+      var timeout = setTimeout(function() {
+        if (!resolved) {
+          resolved = true;
+          state.loading = false;
+          state.error = 'not_authenticated';
+          notify();
+          resolve();
+        }
+      }, 8000);
       firebase.auth().onAuthStateChanged(function(user) {
+        if (resolved) return;
+        resolved = true;
+        clearTimeout(timeout);
         if (user) {
           var email = (user.email || '').toLowerCase();
           if (isAuthorized(email)) {
