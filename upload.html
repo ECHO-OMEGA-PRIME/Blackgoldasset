@@ -148,11 +148,37 @@
       html += '<div class="ion-grid" style="margin-bottom:16px">';
       html += '<div class="ion-item"><span class="ion-label">Sample Date</span><span class="ion-value">' + c.formatDate(sample.sample_date) + '</span></div>';
       html += '<div class="ion-item"><span class="ion-label">Lab ID</span><span class="ion-value">' + c.escapeHtml(sample.lab_id || '—') + '</span></div>';
-      html += '<div class="ion-item"><span class="ion-label">TDS</span><span class="ion-value">' + c.formatNumber(sample.tds) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">TDS</span><span class="ion-value">' + c.formatNumber(sample.tds) + ' mg/L</span></div>';
       html += '<div class="ion-item"><span class="ion-label">pH</span><span class="ion-value">' + c.formatNumber(sample.sample_ph, 2) + '</span></div>';
-      html += '<div class="ion-item"><span class="ion-label">Chloride</span><span class="ion-value">' + c.formatNumber(sample.chloride) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Chloride</span><span class="ion-value">' + c.formatNumber(sample.chloride) + ' mg/L</span></div>';
       html += '<div class="ion-item"><span class="ion-label">Ion Balance</span><span class="ion-value">' + c.formatNumber(sample.ion_balance_pct, 2) + '%</span></div>';
       html += '</div>';
+
+      // Full ion breakdown
+      html += '<div class="section-label" style="margin-top:16px">Ion Breakdown (mg/L)</div>';
+      html += '<div class="ion-grid">';
+      var ions = [
+        ['Calcium', sample.calcium], ['Magnesium', sample.magnesium],
+        ['Sodium', sample.sodium], ['Potassium', sample.potassium],
+        ['Barium', sample.barium], ['Strontium', sample.strontium],
+        ['Iron', sample.iron], ['Manganese', sample.manganese],
+        ['Sulfate', sample.sulfate], ['H₂S', sample.h2s],
+        ['Conductivity', sample.conductivity], ['Sp. Gravity', sample.specific_gravity]
+      ];
+      ions.forEach(function(pair) {
+        if (pair[1] != null) {
+          html += '<div class="ion-item"><span class="ion-label">' + pair[0] + '</span><span class="ion-value">' + c.formatNumber(pair[1]) + '</span></div>';
+        }
+      });
+      html += '</div>';
+
+      // Scale rows + validation
+      if (sample.scale_rows_parsed) {
+        html += '<p style="margin-top:12px;font-size:0.85rem;color:var(--gold)">✓ ' + sample.scale_rows_parsed + ' scale sweep rows parsed</p>';
+      }
+      if (sample.validation_status === 'validated') {
+        html += '<p style="font-size:0.85rem;color:#22c55e">✓ Ion balance validated (' + c.formatNumber(sample.ion_balance_pct, 2) + '%)</p>';
+      }
 
       html += '</div>';
       resultsEl.innerHTML = html;

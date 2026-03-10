@@ -86,9 +86,20 @@
 
       infoWindow = new google.maps.InfoWindow();
 
+      // Load map data — handle case where auth already resolved before Maps loaded
+      var mapDataLoaded = false;
+      function tryLoadMapData() {
+        if (mapDataLoaded) return;
+        var s = wiAuth.getState();
+        if (s.user && s.authorized && !s.loading) {
+          mapDataLoaded = true;
+          loadMapData();
+        }
+      }
       wiAuth.subscribe(function(s) {
-        if (s.user && !s.loading) loadMapData();
+        tryLoadMapData();
       });
+      tryLoadMapData();
 
       document.getElementById('mapIonSelect').addEventListener('change', function() {
         selectedIon = this.value;
@@ -176,7 +187,7 @@
           ]
         });
       } catch(e) {
-        // Heatmap data not available yet
+        console.warn('Heatmap load error:', e.message);
       }
     }
   })();
