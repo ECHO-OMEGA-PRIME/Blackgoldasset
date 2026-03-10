@@ -40,6 +40,9 @@ nav.scrolled { padding: 10px 0; background: rgba(5,5,5,0.92); border-bottom: 1px
 .nav-cta { background: var(--gold) !important; color: var(--black) !important; padding: 10px 24px !important; font-weight: 600 !important; letter-spacing: 1.5px !important; transition: all 0.3s ease !important; }
 .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(200,149,46,0.4); }
 .nav-cta::after { display: none !important; }
+.nav-water-intel { color: var(--gold) !important; font-weight: 600 !important; border: 1px solid rgba(200,149,46,0.4); padding: 6px 16px !important; border-radius: 4px; }
+.nav-water-intel:hover { background: rgba(200,149,46,0.1) !important; border-color: var(--gold); }
+.nav-water-intel::after { display: none !important; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
 .hamburger span { display: block; width: 26px; height: 2px; background: var(--gold); transition: all 0.3s ease; }
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; z-index: 1; }
@@ -315,6 +318,7 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
       <a href="#products">Products</a>
       <a href="#services">Services</a>
       <a href="#why-bgat">Why BGAT</a>
+      <a href="dashboard.html" class="nav-water-intel">Water Intel</a>
       <a href="#contact" class="nav-cta">Contact Us</a>
       <div class="nav-user-area">
         <button class="nav-user-btn" id="navSignIn" onclick="openAuthModal()">Sign In</button>
@@ -496,7 +500,7 @@ footer { background: var(--black); border-top: 1px solid rgba(200,149,46,0.1); p
 </div></div></section>
 
 <footer><div class="container">
-  <div class="footer-top"><div class="footer-brand"><h3>BGAT</h3><p>Black Gold Asset Transfer LLC</p></div><div class="footer-links"><a href="#about">About</a><a href="#products">Products</a><a href="#services">Services</a><a href="#contact">Contact</a></div></div>
+  <div class="footer-top"><div class="footer-brand"><h3>BGAT</h3><p>Black Gold Asset Transfer LLC</p></div><div class="footer-links"><a href="#about">About</a><a href="#products">Products</a><a href="#services">Services</a><a href="dashboard.html">Water Intel</a><a href="#contact">Contact</a></div></div>
   <div class="footer-bottom"><p>&copy; 2025 Black Gold Asset Transfer LLC. All rights reserved.</p><p>Veteran-Owned &bull; Made in USA</p></div>
   <div class="footer-powered"><div class="chromatic">Created &amp; Powered by Echo Prime Technologies</div><div class="sovereign">The Sovereign Architect &mdash; Bob McWilliams</div></div>
 </div></footer>

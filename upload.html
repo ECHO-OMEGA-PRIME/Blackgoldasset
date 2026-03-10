@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload — BGAT Water Intel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/water-intel.css">
+</head>
+<body>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script>
+  (function() {
+    'use strict';
+    var apiUpload = bgat.api.apiUpload;
+    var c = bgat.common;
+
+    var content = c.initPage({
+      page: 'upload',
+      title: 'Upload Analysis',
+      subtitle: 'Upload PDF lab reports for automated parsing'
+    });
+
+    var isUploading = false;
+
+    content.innerHTML = buildUploadUI();
+    bindEvents();
+
+    function buildUploadUI() {
+      var html = '';
+
+      // Upload Zone
+      html += '<div class="glass-card" style="padding:32px;margin-bottom:32px">';
+      html += '<div class="upload-zone" id="uploadZone">';
+      html += c.ICONS.upload;
+      html += '<h3>Drop PDF Here</h3>';
+      html += '<p>or click to browse — DownHole SAT reports supported</p>';
+      html += '<input type="file" id="fileInput" accept=".pdf" style="display:none">';
+      html += '</div>';
+      html += '</div>';
+
+      // Status Area
+      html += '<div id="uploadStatus" style="display:none">';
+      html += '<div class="glass-card" style="padding:24px">';
+      html += '<div class="section-label">Upload Progress</div>';
+      html += '<div id="uploadProgress"></div>';
+      html += '</div>';
+      html += '</div>';
+
+      // Results Area
+      html += '<div id="uploadResults" style="display:none"></div>';
+
+      // Instructions
+      html += '<div class="glass-card" style="padding:24px;margin-top:32px">';
+      html += '<div class="section-label">Supported Formats</div>';
+      html += '<div class="ion-grid">';
+      html += '<div class="ion-item"><span class="ion-label">DownHole SAT</span><span class="badge badge-success">Supported</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Stim-Lab</span><span class="badge badge-info">Planned</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Core Labs</span><span class="badge badge-info">Planned</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">SGS</span><span class="badge badge-info">Planned</span></div>';
+      html += '</div>';
+      html += '<p style="margin-top:16px;font-size:0.85rem;color:var(--white-dim)">The system automatically parses all 19 ion fields plus 12-row scale sweep data from DownHole SAT reports. Ion balance is computed and validated (target &lt; 5%).</p>';
+      html += '</div>';
+
+      return html;
+    }
+
+    function bindEvents() {
+      var zone = document.getElementById('uploadZone');
+      var input = document.getElementById('fileInput');
+
+      zone.addEventListener('click', function() { input.click(); });
+
+      zone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        zone.classList.add('dragover');
+      });
+
+      zone.addEventListener('dragleave', function() {
+        zone.classList.remove('dragover');
+      });
+
+      zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        var files = e.dataTransfer.files;
+        if (files.length > 0) handleFile(files[0]);
+      });
+
+      input.addEventListener('change', function() {
+        if (input.files.length > 0) handleFile(input.files[0]);
+      });
+    }
+
+    async function handleFile(file) {
+      if (isUploading) return;
+
+      if (!file.name.toLowerCase().endsWith('.pdf')) {
+        c.showToast('Only PDF files are supported', 'error');
+        return;
+      }
+
+      if (file.size > 20 * 1024 * 1024) {
+        c.showToast('File too large (max 20 MB)', 'error');
+        return;
+      }
+
+      isUploading = true;
+      var statusEl = document.getElementById('uploadStatus');
+      var progressEl = document.getElementById('uploadProgress');
+      statusEl.style.display = 'block';
+      progressEl.innerHTML = '<p style="color:var(--gold)">⏳ Uploading and parsing <strong>' + c.escapeHtml(file.name) + '</strong>...</p>';
+
+      try {
+        var result = await apiUpload('/api/v1/samples/upload', file);
+        progressEl.innerHTML = '<p style="color:#22c55e">✓ Successfully parsed and stored</p>';
+        c.showToast('PDF uploaded and parsed successfully', 'success');
+        showResults(result);
+      } catch(e) {
+        progressEl.innerHTML = '<p style="color:#ef4444">✗ Upload failed: ' + c.escapeHtml(e.message) + '</p>';
+        c.showToast('Upload failed: ' + e.message, 'error');
+      } finally {
+        isUploading = false;
+      }
+    }
+
+    function showResults(sample) {
+      var resultsEl = document.getElementById('uploadResults');
+      resultsEl.style.display = 'block';
+
+      var html = '<div class="glass-card" style="padding:24px;margin-top:24px">';
+      html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">';
+      html += '<span class="section-label">Parsed Results</span>';
+      if (sample.well_id) {
+        html += '<a href="well-detail.html?id=' + encodeURIComponent(sample.well_id) + '" class="btn-primary btn-sm">View Well →</a>';
+      }
+      html += '</div>';
+
+      // Key results
+      html += '<div class="ion-grid" style="margin-bottom:16px">';
+      html += '<div class="ion-item"><span class="ion-label">Sample Date</span><span class="ion-value">' + c.formatDate(sample.sample_date) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Lab ID</span><span class="ion-value">' + c.escapeHtml(sample.lab_id || '—') + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">TDS</span><span class="ion-value">' + c.formatNumber(sample.tds) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">pH</span><span class="ion-value">' + c.formatNumber(sample.sample_ph, 2) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Chloride</span><span class="ion-value">' + c.formatNumber(sample.chloride) + '</span></div>';
+      html += '<div class="ion-item"><span class="ion-label">Ion Balance</span><span class="ion-value">' + c.formatNumber(sample.ion_balance_pct, 2) + '%</span></div>';
+      html += '</div>';
+
+      html += '</div>';
+      resultsEl.innerHTML = html;
+    }
+  })();
+  </script>
+</body>
+</html>
