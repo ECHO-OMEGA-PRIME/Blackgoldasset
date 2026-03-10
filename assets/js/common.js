@@ -61,39 +61,35 @@ function buildAuthOverlay() {
   overlay.id = 'wiAuthOverlay';
   overlay.className = 'wi-auth-overlay';
   overlay.style.display = 'none';
-  overlay.innerHTML = '<div class="wi-auth-card">' +
-    '<h2>Water Intel Login</h2>' +
-    '<p>Sign in to access the Permian Basin Water Intelligence Platform</p>' +
-    '<div class="wi-auth-error" id="wiAuthError"></div>' +
-    '<div class="form-group"><label>Username</label><input type="text" id="wiLoginUser" placeholder="Username"></div>' +
-    '<div class="form-group"><label>Password</label><input type="password" id="wiLoginPass" placeholder="Password"></div>' +
-    '<button class="btn-primary" style="width:100%" onclick="wiHandleLogin()">Sign In</button>' +
-    '<p style="margin-top:16px;text-align:center;font-size:0.8rem;color:var(--white-dim)"><a href="index.html">← Back to BGAT Homepage</a></p>' +
-    '</div>';
+  // Content set dynamically based on auth state
   return overlay;
 }
 
-/* ── Login Handler ── */
-window.wiHandleLogin = async function() {
-  var user = document.getElementById('wiLoginUser').value.trim();
-  var pass = document.getElementById('wiLoginPass').value;
-  var errEl = document.getElementById('wiAuthError');
+/* ── Show Under Construction (unauthorized users) ── */
+function showUnderConstruction() {
+  var overlay = document.getElementById('wiAuthOverlay');
+  if (!overlay) return;
+  overlay.innerHTML = '<div class="wi-auth-card" style="text-align:center">' +
+    '<div style="font-size:3rem;margin-bottom:16px">🚧</div>' +
+    '<h2 style="margin-bottom:12px">Page Under Construction</h2>' +
+    '<p style="color:var(--white-dim);margin-bottom:24px">This section is currently under development and access is restricted.</p>' +
+    '<a href="index.html" class="btn-primary" style="display:inline-block;padding:12px 32px;text-decoration:none;border-radius:4px">← Back to BGAT Homepage</a>' +
+    '</div>';
+  overlay.style.display = 'flex';
+}
 
-  if (!user || !pass) {
-    errEl.textContent = 'Enter username and password';
-    errEl.classList.add('show');
-    return;
-  }
-
-  try {
-    errEl.classList.remove('show');
-    await window.wiAuth.login(user, pass);
-    window.wiAuth.hideLoginOverlay();
-  } catch(e) {
-    errEl.textContent = e.message || 'Login failed';
-    errEl.classList.add('show');
-  }
-};
+/* ── Show Not Signed In (needs to login on main site first) ── */
+function showNeedLogin() {
+  var overlay = document.getElementById('wiAuthOverlay');
+  if (!overlay) return;
+  overlay.innerHTML = '<div class="wi-auth-card" style="text-align:center">' +
+    '<div style="font-size:3rem;margin-bottom:16px">🔒</div>' +
+    '<h2 style="margin-bottom:12px">Sign In Required</h2>' +
+    '<p style="color:var(--white-dim);margin-bottom:24px">Please sign in from the BGAT homepage to access Water Intel.</p>' +
+    '<a href="index.html" class="btn-primary" style="display:inline-block;padding:12px 32px;text-decoration:none;border-radius:4px">Go to Homepage & Sign In</a>' +
+    '</div>';
+  overlay.style.display = 'flex';
+}
 
 /* ── Build Top Bar ── */
 function buildTopBar(title, subtitle) {
@@ -148,30 +144,22 @@ function initPage(opts) {
     mobileOverlay.classList.remove('open');
   });
 
-  // Init auth
+  // Init auth — Firebase-based, no second login
   window.wiAuth.init().then(function() {
     var s = window.wiAuth.getState();
-    if (!s.user) {
-      window.wiAuth.showLoginOverlay();
-    } else {
+    if (s.error === 'not_authenticated') {
+      showNeedLogin();
+    } else if (s.error === 'unauthorized' || !s.authorized) {
+      showUnderConstruction();
+    } else if (s.user) {
       updateUserPill(s.user);
     }
   });
 
   // Listen for auth changes
   window.wiAuth.subscribe(function(s) {
-    if (s.user) {
+    if (s.user && s.authorized) {
       updateUserPill(s.user);
-    }
-  });
-
-  // Enter key on login
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      var overlay = document.getElementById('wiAuthOverlay');
-      if (overlay && overlay.style.display !== 'none') {
-        window.wiHandleLogin();
-      }
     }
   });
 
